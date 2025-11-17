@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Inscrição Curso</title>
+<link rel="icon" type="image/x-icon" href="logo.ico?v=1">
+<link rel="shortcut icon" href="UniCesumar.png?v=1">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif}
+  html,body{height:100%}
+  body{background:linear-gradient(135deg,#004aad,#007bff);display:flex;justify-content:center;align-items:center;padding:20px;overflow:auto;}
+
+  /* Splash */
+  #splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
+  #splash img{width:350px;margin-bottom:20px;animation:fadeInDown 1.2s}
+  #splash p{color:#004aad;font-size:1.25rem;font-weight:500;animation:fadeIn 1.2s}
+  @keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+  /* App card */
+  #app{display:flex;flex-direction:row;background:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1000px;width:100%;overflow:hidden;opacity:0;transform:scale(.98);transition:opacity .5s,transform .5s}
+
+  /* Tutor (left column) */
+  #tutor{flex:0 0 380px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:#f6f9ff}
+  #tutor #logo-tutor{width:330px;margin-bottom:14px;object-fit:contain}
+  #tutor img.tutor-photo{width:200px;height:200px;border-radius:50%;margin-bottom:14px;object-fit:cover}
+  .tutor-name{color:#004aad;font-size:1.45rem;font-weight:700;text-align:center;margin-bottom:6px}
+  .tutor-role{color:#333;font-size:1rem;text-align:center;margin-bottom:16px}
+
+  /* Contact buttons */
+  .contact-list{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+  .contact-btn{display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;border-radius:8px;padding:10px 14px;color:#004aad;text-decoration:none;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.06);width:160px;transition:transform .18s,background .18s,color .18s}
+  .contact-btn img{width:32px;height:32px;display:block}
+  .contact-btn:hover{transform:translateY(-4px);background:#007bff;color:#fff}
+  .contact-btn:hover img{filter:brightness(0) invert(1)}
+
+  /* Form container (right) */
+  #form-container{flex:1;padding:28px 30px;display:flex;flex-direction:column;justify-content:center}
+  #form-container h1{color:#004aad;font-size:1.9rem;margin-bottom:12px}
+  form{display:flex;flex-direction:column;gap:10px}
+  input[type="text"],input[type="tel"],input[type="email"],input[type="date"]{
+    width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem
+  }
+  input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,255,0.08)}
+  .small-note{font-size:.9rem;color:#666;margin-top:4px}
+
+  /* Dropdown custom */
+  #dropdown-interesse{position:relative}
+  #dropdown-display{display:block;padding:12px;border-radius:8px;border:1px solid #d0d6e0;background:#fff;cursor:pointer}
+  #dropdown-options{position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;overflow:auto;display:none;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+  #dropdown-options div{padding:10px;cursor:pointer}
+  #dropdown-options div:hover{background:#f2f6ff}
+  .categoria-title{font-weight:700;padding:10px;background:#f6f9ff;margin-top:6px;border-radius:6px}
+
+  /* Submit */
+  .btn{background:#007bff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .12s}
+  .btn:hover{transform:scale(1.02);background:#0056b3}
+
+  /* Botão carregando */
+  .btn.loading::after {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    text-align: left;
+    margin-left: 6px;
+    animation: dots 1s steps(5, end) infinite;
+  }
+  @keyframes dots {
+    0%, 20% { content: ''; }
+    40% { content: '.'; }
+    60% { content: '..'; }
+    80%, 100% { content: '...'; }
+  }
+
+  /* Congrats overlay */
+  #congrats{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9998;overflow:hidden}
+  #congrats video#confete-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;}
+  #congrats-card{
+    position:relative;
+    z-index:2;
+    background:rgba(255,255,255,0.9); /* leve transparência */
+    padding:36px;
+    border-radius:14px;
+    box-shadow:0 20px 50px rgba(0,0,0,.18);
+    text-align:center;
+    max-width:520px;
+  }
+  #congrats-card h2{color:#004aad;margin-bottom:10px}
+
+  /* Centralizar botão Instagram no card */
+  #congrats-card a.contact-btn {
+    display: inline-flex;
+    justify-content: center;
+    margin: 15px auto 0 auto; /* centraliza horizontalmente */
+  }
+
+  /* Responsive */
+  @media (max-width:1024px){
+    #app{flex-direction:column}
+    #tutor{flex:0 0 auto;width:100%;padding:20px}
+    #tutor #logo-tutor{width:280px}
+    #tutor img.tutor-photo{width:160px;height:160px}
+  }
+  @media (max-width:640px){
+    #splash img{width:300px}
+    #tutor #logo-tutor{width:220px}
+    #tutor img.tutor-photo{width:140px;height:140px}
+    .contact-btn{width:140px}
+    #app{padding:18px}
+  }
+</style>
+</head>
+<body>
+
+  <!-- Splash -->
+  <div id="splash">
+    <img src="UniCesumar.png" alt="Logo">
+    <p>Carregando...</p>
+  </div>
+
+  <!-- App -->
+  <div id="app" role="main" aria-labelledby="page-title" style="display:none">
+
+    <!-- Tutor (left) -->
+    <aside id="tutor" aria-label="Informações do tutor">
+      <img id="logo-tutor" src="UniCesumar.png" alt="Logo">
+      <img class="tutor-photo" src="Fabricio Benigno.jpg" alt="Foto do tutor Fabricio Benigno">
+      <div class="tutor-name">Fabricio Benigno</div>
+      <div class="tutor-role">Tutor e Orientador</div>
+
+      <div class="contact-list" aria-hidden="false">
+        <a class="contact-btn" href="https://wa.me/5585921695620" target="_blank" rel="noopener noreferrer">
+          <img src="whatsapp.ico" alt="WhatsApp"> WhatsApp
+        </a>
+
+        <a class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
+          <img src="instagram.ico" alt="Instagram"> Instagram
+        </a>
+      </div>
+    </aside>
+
+    <!-- Form (right) -->
+    <section id="form-container" aria-labelledby="page-title">
+      <h1 id="page-title">Cadastro de Inscrição</h1>
+
+      <form id="form-inscricao" onsubmit="handleSubmit(event)" autocomplete="off" novalidate>
+        <input id="nome" type="text" placeholder="Nome Completo" required />
+        <input id="telefone" type="tel" placeholder="Número" required />
+        <input id="cpf" type="text" placeholder="CPF" required />
+        <input id="email" type="email" placeholder="Email" required />
+        <input id="nascimento" type="date" placeholder="Data de Nascimento" required />
+        <input id="endereco" type="text" placeholder="Endereço" required />
+        <input id="cep" type="text" placeholder="CEP" required />
+
+        <!-- Dropdown Área e Cursos -->
+        <div id="dropdown-interesse" aria-haspopup="listbox">
+          <div id="dropdown-display" aria-expanded="false" tabindex="0">Área de interesse</div>
+          <div id="dropdown-options" role="listbox" aria-label="Áreas de interesse"></div>
+        </div>
+
+        <div class="small-note">Selecione a área antes de enviar.</div>
+
+        <button type="submit" class="btn" aria-label="Enviar inscrição">Enviar Inscrição</button>
+      </form>
+    </section>
+  </div>
+
+  <!-- Congrats -->
+  <div id="congrats" role="dialog" aria-modal="true" aria-hidden="true">
+    <video autoplay muted loop id="confete-video">
+      <source src="confetes.mp4" type="video/mp4">
+    </video>
+    <div id="congrats-card">
+      <img src="festa.ico" alt="Ícone de festa" style="width:40px;height:40px;margin-bottom:5px;">
+      <img src="festa.ico" alt="Ícone de festa" style="width:40px;height:40px;margin-bottom:10px;">
+      <h2 id="congrats-title"></h2>
+      <p>Estarei aqui para te auxiliar em sua jornada acadêmica.</p>
+      <a class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
+        <img src="instagram.ico" alt="Instagram" style="width:24px;height:24px;"> Instagram
+      </a>
+    </div>
+  </div>
+
+<script>
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPPOOxKjI2z_DHiN2RfqaKp9fh6Z_rw-GUN3IFVt8wapzeWuNYY8t2gT7OEmFrK9Im/exec";
+
+// Splash
+window.addEventListener("load", () => {
+  setTimeout(()=> {
+    const splash = document.getElementById("splash");
+    splash.style.opacity = 0;
+    setTimeout(()=> {
+      splash.style.display = "none";
+      const app = document.getElementById("app");
+      app.style.display = "flex";
+      requestAnimationFrame(()=>{ app.style.opacity = 1; app.style.transform = "scale(1)"; });
+    }, 500);
+  }, 1200);
+});
+
+// Áreas e Cursos
+const areas = {
+  "Educação": { "Graduação": ["Pedagogia","Licenciatura em Matemática"], "Pós": ["Gestão Educacional"] },
+  "Artes e Design": { "Graduação": ["Design Gráfico","Artes Visuais"], "Pós": ["Design de Interiores"] },
+  "Gestão de Negócios": { "Graduação": ["Administração","Marketing"], "Pós": ["MBA Gestão de Projetos"] },
+  "Jurídico e Segurança": { "Graduação": [], "Pós": [] },
+  "Comunicação": { "Graduação": [], "Pós": [] },
+  "Saúde Animal": { "Graduação": [], "Pós": [] },
+  "Agrárias e Meio Ambiente": { "Graduação": [], "Pós": [] },
+  "Alimentos e Bebidas": { "Graduação": [], "Pós": [] },
+  "Engenharias e Arquitetura": { "Graduação": [], "Pós": [] },
+  "Saúde e Bem-Estar": { "Graduação": [], "Pós": [] },
+  "Tecnologia": { "Graduação": [], "Pós": [] }
+};
+
+const dropdown = document.getElementById("dropdown-interesse");
+const display = document.getElementById("dropdown-display");
+const optionsContainer = document.getElementById("dropdown-options");
+
+let step = "area";
+let selectedArea = "";
+
+function renderOptions() {
+  optionsContainer.innerHTML = "";
+
+  if(step === "area") {
+    Object.keys(areas).forEach(area=>{
+      const div = document.createElement("div");
+      div.textContent = area;
+      div.setAttribute("role","option");
+      div.addEventListener("click",(e)=>{
+        e.stopPropagation();
+        selectedArea = area;
+        step="curso";
+        renderOptions();
+      });
+      optionsContainer.appendChild(div);
+    });
+  } else if(step==="curso"){
+    const cursos = areas[selectedArea];
+    Object.keys(cursos).forEach(cat=>{
+      if(cursos[cat].length>0){
+        const catDiv = document.createElement("div");
+        catDiv.textContent = cat;
+        catDiv.className = "categoria-title";
+        optionsContainer.appendChild(catDiv);
+
+        cursos[cat].forEach(curso=>{
+          const div = document.createElement("div");
+          div.textContent = curso;
+          div.setAttribute("role","option");
+          div.addEventListener("click",(e)=>{
+            e.stopPropagation();
+            display.textContent = curso;
+            closeOptions();
+            step="area";
+            selectedArea="";
+          });
+          optionsContainer.appendChild(div);
+        });
+      }
+    });
+  }
+
+  // Dropdown sempre pra cima com scroll
+  const rect = dropdown.getBoundingClientRect();
+  const maxHeight = rect.top - 10;
+  optionsContainer.style.bottom = rect.height + "px";
+  optionsContainer.style.top = "auto";
+  optionsContainer.style.maxHeight = maxHeight + "px";
+  optionsContainer.style.overflowY = "auto";
+  optionsContainer.style.display = "block";
+  display.setAttribute("aria-expanded","true");
+}
+
+function openOptions(){ renderOptions(); }
+function closeOptions(){ optionsContainer.style.display="none"; display.setAttribute("aria-expanded","false"); }
+
+optionsContainer.addEventListener("click",(e)=>{ e.stopPropagation(); });
+display.addEventListener("click",(e)=>{
+  e.stopPropagation();
+  step="area";
+  selectedArea="";
+  optionsContainer.style.display==="block"?closeOptions():openOptions();
+});
+document.addEventListener("click",()=>{ closeOptions(); });
+
+// Form submit com loading
+async function handleSubmit(e){
+  e.preventDefault();
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const cpf = document.getElementById("cpf").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const nascimento = document.getElementById("nascimento").value;
+  const endereco = document.getElementById("endereco").value.trim();
+  const cep = document.getElementById("cep").value.trim();
+  const areaInteresse = display.textContent.trim();
+
+  if(!nome || !telefone || !cpf || !email || !nascimento || !endereco || !cep){ alert("Preencha todos os campos."); return; }
+  if(!areaInteresse || areaInteresse==="Área de interesse"){ alert("Selecione a Área de Interesse."); return; }
+
+  const payload = { nome, telefone, cpf, email, nascimento, endereco, cep, areaInteresse };
+
+  // Botão com loading
+  const btn = document.querySelector(".btn");
+  btn.disabled = true;
+  btn.textContent = "Enviando";
+  btn.classList.add("loading");
+
+  try {
+    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
+    document.getElementById("form-inscricao").reset();
+    display.textContent="Área de interesse";
+    showCongrats(nome);
+  } catch(err){ alert("Erro ao enviar."); console.error(err);}
+  finally {
+    btn.disabled = false;
+    btn.textContent = "Enviar Inscrição";
+    btn.classList.remove("loading");
+  }
+}
+
+function showCongrats(nomeCompleto){
+  const [primeiro, ...resto] = nomeCompleto.split(" ");
+  const segundo = resto.length>0?resto[0]:"";
+  const titulo = document.getElementById("congrats-title");
+  titulo.textContent = `Parabéns ${primeiro} ${segundo} por ter feito sua matrícula!\nFico muito feliz por ter participado desse passo para seu crescimento pessoal e profissional!`;
+
+  const congrats = document.getElementById("congrats");
+  congrats.style.display="flex";
+
+  // Redireciona automaticamente para Instagram em 1 minuto
+  setTimeout(()=>{
+    window.location.href = "https://instagram.com/fabricio_benigno";
+  },60000);
+}
+</script>
+</body>
+</html>
