@@ -2,16 +2,27 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Inscrição Curso</title>
-<link rel="icon" type="image/x-icon" href="logo.ico?v=1">
-<link rel="shortcut icon" href="UniCesumar.png?v=1">
+<link rel="icon" type="image/x-icon" href="simbolo.ico?v=1">
+<link rel="shortcut icon" href="simbolo.png?v=1">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
+  /* Basic reset and fonts */
   *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif}
   html,body{height:100%}
-  body{background:linear-gradient(135deg,#004aad,#007bff);display:flex;justify-content:center;align-items:center;padding:20px;overflow:auto;}
+  body{
+    background:linear-gradient(135deg,#004aad,#007bff);
+    display:flex;justify-content:center;align-items:center;
+    padding:20px;
+    overflow:auto;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    scroll-behavior:smooth; /* rolamento suave */
+    padding-top: constant(safe-area-inset-top); /* iOS < 11.2 */
+    padding-top: env(safe-area-inset-top); /* notch support */
+  }
 
   /* Splash */
   #splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
@@ -42,15 +53,19 @@
   #form-container h1{color:#004aad;font-size:1.9rem;margin-bottom:12px}
   form{display:flex;flex-direction:column;gap:10px}
   input[type="text"],input[type="tel"],input[type="email"],input[type="date"]{
-    width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem
+    width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem;background:#fff
   }
+  input::placeholder{color:#999}
   input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,255,0.08)}
   .small-note{font-size:.9rem;color:#666;margin-top:4px}
 
   /* Dropdown custom */
   #dropdown-interesse{position:relative}
   #dropdown-display{display:block;padding:12px;border-radius:8px;border:1px solid #d0d6e0;background:#fff;cursor:pointer}
-  #dropdown-options{position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;overflow:auto;display:none;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,0.12);}
+  #dropdown-options{
+    position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;overflow:auto;display:none;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    -webkit-overflow-scrolling:touch; /* smooth scrolling on iOS */
+  }
   #dropdown-options div{padding:10px;cursor:pointer}
   #dropdown-options div:hover{background:#f2f6ff}
   .categoria-title{font-weight:700;padding:10px;background:#f6f9ff;margin-top:6px;border-radius:6px}
@@ -58,8 +73,9 @@
   /* Submit */
   .btn{background:#007bff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .12s}
   .btn:hover{transform:scale(1.02);background:#0056b3}
+  .btn[disabled]{opacity:.7;cursor:not-allowed}
 
-  /* Botão carregando */
+  /* Botão carregando (3 pontinhos) */
   .btn.loading::after {
     content: '';
     display: inline-block;
@@ -95,9 +111,10 @@
     display: inline-flex;
     justify-content: center;
     margin: 15px auto 0 auto; /* centraliza horizontalmente */
+    width:180px;
   }
 
-  /* Responsive */
+  /* Small devices: keep visuals but adapt spacing */
   @media (max-width:1024px){
     #app{flex-direction:column}
     #tutor{flex:0 0 auto;width:100%;padding:20px}
@@ -110,14 +127,18 @@
     #tutor img.tutor-photo{width:140px;height:140px}
     .contact-btn{width:140px}
     #app{padding:18px}
+    #form-container{padding:20px}
+    #dropdown-display{padding:10px}
+    #dropdown-options{border-radius:10px}
+    #congrats-card{padding:22px;margin:12px}
   }
 </style>
 </head>
 <body>
 
   <!-- Splash -->
-  <div id="splash">
-    <img src="UniCesumar.png" alt="Logo">
+  <div id="splash" aria-hidden="false">
+    <img src="simbolo.png" alt="Logo">
     <p>Carregando...</p>
   </div>
 
@@ -126,8 +147,8 @@
 
     <!-- Tutor (left) -->
     <aside id="tutor" aria-label="Informações do tutor">
-      <img id="logo-tutor" src="UniCesumar.png" alt="Logo">
-      <img class="tutor-photo" src="Fabricio Benigno.jpg" alt="Foto do tutor Fabricio Benigno">
+      <img id="logo-tutor" src="simbolo.png" alt="Logo">
+      <img class="tutor-photo" src="fabricio-benigno.jpg" alt="Foto do tutor Fabricio Benigno">
       <div class="tutor-name">Fabricio Benigno</div>
       <div class="tutor-role">Tutor e Orientador</div>
 
@@ -170,25 +191,28 @@
 
   <!-- Congrats -->
   <div id="congrats" role="dialog" aria-modal="true" aria-hidden="true">
-    <video autoplay muted loop id="confete-video">
+    <video autoplay muted loop id="confete-video" aria-hidden="true" style="pointer-events:none;">
       <source src="confetes.mp4" type="video/mp4">
     </video>
-    <div id="congrats-card">
-      <img src="festa.ico" alt="Ícone de festa" style="width:40px;height:40px;margin-bottom:5px;">
-      <img src="festa.ico" alt="Ícone de festa" style="width:40px;height:40px;margin-bottom:10px;">
+    <div id="congrats-card" role="document" aria-labelledby="congrats-title">
+      <img src="festa.ico" alt="" style="width:40px;height:40px;margin-bottom:5px;" aria-hidden="true">
+      <img src="festa.ico" alt="" style="width:40px;height:40px;margin-bottom:10px;" aria-hidden="true">
       <h2 id="congrats-title"></h2>
       <p>Estarei aqui para te auxiliar em sua jornada acadêmica.</p>
-      <a class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
+      <a id="insta-btn" class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
         <img src="instagram.ico" alt="Instagram" style="width:24px;height:24px;"> Instagram
       </a>
     </div>
   </div>
 
 <script>
+/* ---------- CONFIG ---------- */
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPPOOxKjI2z_DHiN2RfqaKp9fh6Z_rw-GUN3IFVt8wapzeWuNYY8t2gT7OEmFrK9Im/exec";
+const AUTO_REDIRECT_MS = 30000; // 30 segundos
+/* ---------------------------- */
 
-// Splash
 window.addEventListener("load", () => {
+  // Splash hide
   setTimeout(()=> {
     const splash = document.getElementById("splash");
     splash.style.opacity = 0;
@@ -201,7 +225,7 @@ window.addEventListener("load", () => {
   }, 1200);
 });
 
-// Áreas e Cursos
+/* ---------- ÁREAS E CURSOS (preencha conforme quiser) ---------- */
 const areas = {
   "Educação": { "Graduação": ["Pedagogia","Licenciatura em Matemática"], "Pós": ["Gestão Educacional"] },
   "Artes e Design": { "Graduação": ["Design Gráfico","Artes Visuais"], "Pós": ["Design de Interiores"] },
@@ -215,6 +239,7 @@ const areas = {
   "Saúde e Bem-Estar": { "Graduação": [], "Pós": [] },
   "Tecnologia": { "Graduação": [], "Pós": [] }
 };
+/* --------------------------------------------------------------- */
 
 const dropdown = document.getElementById("dropdown-interesse");
 const display = document.getElementById("dropdown-display");
@@ -222,6 +247,8 @@ const optionsContainer = document.getElementById("dropdown-options");
 
 let step = "area";
 let selectedArea = "";
+let submitting = false; // proteção contra duplo envio
+let redirectTimer = null;
 
 function renderOptions() {
   optionsContainer.innerHTML = "";
@@ -235,14 +262,14 @@ function renderOptions() {
         e.stopPropagation();
         selectedArea = area;
         step="curso";
-        renderOptions();
+        renderOptions(); // mostra cursos imediatamente
       });
       optionsContainer.appendChild(div);
     });
   } else if(step==="curso"){
-    const cursos = areas[selectedArea];
+    const cursos = areas[selectedArea] || {};
     Object.keys(cursos).forEach(cat=>{
-      if(cursos[cat].length>0){
+      if(cursos[cat] && cursos[cat].length>0){
         const catDiv = document.createElement("div");
         catDiv.textContent = cat;
         catDiv.className = "categoria-title";
@@ -267,7 +294,7 @@ function renderOptions() {
 
   // Dropdown sempre pra cima com scroll
   const rect = dropdown.getBoundingClientRect();
-  const maxHeight = rect.top - 10;
+  const maxHeight = Math.max(rect.top - 10, 120); // garante ao menos 120px
   optionsContainer.style.bottom = rect.height + "px";
   optionsContainer.style.top = "auto";
   optionsContainer.style.maxHeight = maxHeight + "px";
@@ -288,9 +315,25 @@ display.addEventListener("click",(e)=>{
 });
 document.addEventListener("click",()=>{ closeOptions(); });
 
-// Form submit com loading
+/* ---------- Proteção contra duplo clique */ 
+function setButtonLoading(on){
+  const btn = document.querySelector(".btn");
+  if(!btn) return;
+  if(on){
+    btn.disabled = true;
+    btn.textContent = "Enviando";
+    btn.classList.add("loading");
+  } else {
+    btn.disabled = false;
+    btn.textContent = "Enviar Inscrição";
+    btn.classList.remove("loading");
+  }
+}
+
+/* ---------- Envio do formulário ---------- */
 async function handleSubmit(e){
   e.preventDefault();
+  if(submitting) return; // evita duplo clique
   const nome = document.getElementById("nome").value.trim();
   const telefone = document.getElementById("telefone").value.trim();
   const cpf = document.getElementById("cpf").value.trim();
@@ -305,40 +348,70 @@ async function handleSubmit(e){
 
   const payload = { nome, telefone, cpf, email, nascimento, endereco, cep, areaInteresse };
 
-  // Botão com loading
-  const btn = document.querySelector(".btn");
-  btn.disabled = true;
-  btn.textContent = "Enviando";
-  btn.classList.add("loading");
-
   try {
+    submitting = true;
+    setButtonLoading(true);
+
+    // POST - usamos no-cors conforme original (mantido)
     await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
+
+    // limpar form
     document.getElementById("form-inscricao").reset();
-    display.textContent="Área de interesse";
+    display.textContent = "Área de interesse";
+
+    // mostrar congrats
     showCongrats(nome);
-  } catch(err){ alert("Erro ao enviar."); console.error(err);}
-  finally {
-    btn.disabled = false;
-    btn.textContent = "Enviar Inscrição";
-    btn.classList.remove("loading");
+  } catch(err){
+    console.error(err);
+    alert("Erro ao enviar.");
+  } finally {
+    // evita remover loading antes da transição/feedback visual
+    setTimeout(()=>{ 
+      submitting = false; 
+      setButtonLoading(false);
+    }, 700);
   }
 }
 
+window.handleSubmit = handleSubmit;
+
+/* ---------- Congrats ---------- */
 function showCongrats(nomeCompleto){
+  // montar mensagem
   const [primeiro, ...resto] = nomeCompleto.split(" ");
   const segundo = resto.length>0?resto[0]:"";
   const titulo = document.getElementById("congrats-title");
   titulo.textContent = `Parabéns ${primeiro} ${segundo} por ter feito sua matrícula!\nFico muito feliz por ter participado desse passo para seu crescimento pessoal e profissional!`;
 
+  // mostrar overlay
   const congrats = document.getElementById("congrats");
-  congrats.style.display="flex";
+  congrats.style.display = "flex";
 
-  // Redireciona automaticamente para Instagram em 30 segundos
-  setTimeout(()=>{
+  // iniciar timer de redirecionamento
+  if(redirectTimer) clearTimeout(redirectTimer);
+  redirectTimer = setTimeout(()=>{
     window.location.href = "https://instagram.com/fabricio_benigno";
-  },30000);
+  }, AUTO_REDIRECT_MS);
 }
+
+/* Se o usuário clicar no botão do Insta, cancelar o timer (evita redirecionar depois) */
+const instaBtn = document.getElementById("insta-btn");
+if(instaBtn){
+  instaBtn.addEventListener("click", ()=>{ 
+    if(redirectTimer) { clearTimeout(redirectTimer); redirectTimer = null; }
+  });
+}
+
+/* ---------- Accessibility small helpers ---------- */
+display.addEventListener("keydown", (e)=>{
+  if(e.key === "Enter" || e.key === " "){ e.preventDefault(); display.click(); }
+});
+
+/* Ensure images load fallback if missing */
+document.querySelectorAll('img').forEach(img=>{
+  img.onerror = ()=>{ img.style.display = 'none'; };
+});
 </script>
+
 </body>
 </html>
-
