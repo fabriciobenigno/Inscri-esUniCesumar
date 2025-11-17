@@ -194,144 +194,379 @@ window.addEventListener("load",()=>{
 
 /* Dropdown de áreas e cursos */
 const areas = {
-  "Educação": {
+  "AGRÁRIAS E MEIO AMBIENTE": {
     "Graduação": [
-      "Pedagogia",
-      "Licenciatura em Matemática",
-      "Licenciatura em Letras",
-      "Licenciatura em História",
-      "Licenciatura em Geografia",
-      "Licenciatura em Ciências Biológicas"
+      "Agronomia SEMI",
+      "Agrotecnologia SEMI",
+      "Gestão Ambiental SEMI",
+      "Gestão do Agronegócio"
     ],
-    "Pós": [
-      "Gestão Educacional",
-      "Educação Inclusiva",
-      "Psicopedagogia"
-    ]
+    "Pós": []
   },
-  "Artes e Design": {
+  "ALIMENTOS E BEBIDAS": {
     "Graduação": [
-      "Design Gráfico",
-      "Artes Visuais",
-      "Moda",
-      "Fotografia",
-      "Publicidade e Propaganda"
+      "Gastronomia",
+      "Tecnologia em Alimentos SEMI"
     ],
-    "Pós": [
+    "Pós": []
+  },
+  "ARTES E DESIGN": {
+    "Graduação": [
+      "Cinema e Audiovisual",
+      "Design de Animação",
       "Design de Interiores",
-      "Ilustração e Animação",
-      "Direção de Arte"
-    ]
-  },
-  "Gestão de Negócios": {
-    "Graduação": [
-      "Administração",
-      "Marketing",
-      "Gestão Financeira",
-      "Gestão de Recursos Humanos",
-      "Comércio Exterior"
+      "Design de Moda",
+      "Design de Produto",
+      "Design Gráfico",
+      "Design Musical",
+      "Licenciatura em Artes Visuais SEMI",
+      "Licenciatura em Dança SEMI",
+      "Licenciatura em Música SEMI",
+      "Licenciatura em Teatro SEMI"
     ],
-    "Pós": [
-      "MBA Gestão de Projetos",
-      "MBA Marketing Digital",
-      "MBA Finanças Corporativas"
-    ]
+    "Pós": []
   },
-  "Jurídico e Segurança": {
+  "COMUNICAÇÃO": {
     "Graduação": [
-      "Direito",
-      "Segurança Pública",
-      "Gestão de Segurança Privada"
-    ],
-    "Pós": [
-      "Direito Empresarial",
-      "Direito Tributário",
-      "Direito Penal"
-    ]
-  },
-  "Comunicação": {
-    "Graduação": [
+      "Ciência da Criatividade",
+      "Fotografia",
       "Jornalismo",
       "Publicidade e Propaganda",
-      "Relações Públicas",
-      "Cinema e Audiovisual"
+      "Relações Públicas"
+    ],
+    "Pós": []
+  },
+  "EDUCAÇÃO": {
+    "Graduação": [
+      "Acompanhamento do Transtorno do Espectro Autista SEMI",
+      "Licenciatura em Ciências Biológicas SEMI",
+      "Licenciatura em Educação Especial SEMI",
+      "Licenciatura em Educação Fisica SEMI",
+      "Licenciatura em Filosofia SEMI",
+      "Licenciatura em Fisica SEMI",
+      "Licenciatura em Geografia SEMI",
+      "Licenciatura em História SEMI",
+      "Licenciatura em Letras Português-Inglês SEMI",
+      "Licenciatura em Letras-Libras SEMI",
+      "Licenciatura em Matemática SEMI",
+      "Licenciatura em Pedagogia SEMI",
+      "Licenciatura em Química SEMI",
+      "Licenciatura em Sociologia SEMI",
+      "Psicopedagogia SEMI",
+      "Segunda Habilitação em Letras Português-Inglês SEMI",
+      "Segunda Licenciatura em Filosofia SEMI",
+      "Segunda Licenciatura em Geografia SEMI",
+      "Segunda Licenciatura em História SEMI",
+      "Segunda Licenciatura em Matemática SEMI",
+      "Segunda Licenciatura em Pedagogia SEMI",
+      "Segunda Licenciatura em Sociologia SEMI",
+      "Teologia"
     ],
     "Pós": [
+      "Alfabetização e Letramento",
+      "Coordenação Pedagógica",
+      "Educação Financeira e o Ensino da Matemática",
+      "Psicopedagogia",
+      "Psicopedagogia Clinica e Institucional",
+      "Educação Executiva e Análise Organizacional",
+      "Pedagogia não Formal: Novos Espaços para a Atuação do Pedagogo",
+      "Ambiente Escolar e Familiar",
+      "Arte, Cultura e Educação",
+      "Atendimento Educacional Especializado - Educação Especial e Inclusiva",
+      "Didática Inovadora na Educação Básica",
+      "Docência Aplicada a Questões Socioeducativas",
+      "Docência no Ensino Superior",
+      "EAD e as Novas Tecnologias Educacionais",
+      "Educação de Jovens e Adultos e Ludopedagogia",
+      "Educação do Campo",
+      "Educação Fisica Escolar",
+      "Educação Infantil e Anos Iniciais do Ensino Fundamental",
+      "Ensino de História e Geografia e suas Linguagens",
+      "Gestão da Aprendizagem e Educação Cognitiva",
+      "Gestão do Conhecimento na Educação",
+      "Gestão Educacional",
+      "História, Cultura e Literatura AfroBrasileira e Indígena",
+      "Inovações no Ensino de Matemática",
+      "Leitura e Produção Textual",
+      "Lingua Portuguesa e Literatura no Contexto Educacional",
+      "Ludicidade no Currículo Escolar",
+      "Metodologias e Processos em EAD",
+      "Neuroaprendizagem",
+      "Pedagogia e Novo Cenário da Home Education",
+      "Pedagogia Empresarial e Desenvolvimento do Conhecimento",
+      "Políticas e Educação Democrática",
+      "Práticas Inovadoras em Educação",
+      "Teatro, Expressividade e Dinamismo no Ambiente Escolar",
+      "Neuropsicopedagogia Novo",
+      "Educação Especial Inclusiva Novo",
+      "Administração Escolar, Supervisão e Orientação Novo",
+      "Educação Especial Transtorno do Espectro Autista Novo",
+      "Psicologia Educacional Novo",
+      "Gestão Escolar",
+      "Gamificação na Educação Novo",
+      "Orientação Educacional Novo"
+    ]
+  },
+  "ENGENHARIAS E ARQUITETURA": {
+    "Graduação": [
+      "Arquitetura e Urbanismo SEMI",
+      "Automação Industria SEMI",
+      "Automação Residencial e Predial",
+      "Energias Renováveis SEMI",
+      "Engenharia Ambiental e Sanitária SEMI",
+      "Engenharia Civil SEMI",
+      "Engenharia de Produção SEMI",
+      "Engenharia Elétrica SEMI",
+      "Engenharia Mecânica SEMI",
+      "Engenharia Mecatrônica SEMI",
+      "Gestão da Produção Industrial",
+      "Manutenção Industrial SEMI",
+      "Segurança do Trabalho"
+    ],
+    "Pós": []
+  },
+  "GESTÃO E NEGÓCIOS": {
+    "Graduação": [
+      "Administração",
+      "Ciências Contábeis",
+      "Ciências Econômicas",
+      "Comércio Exterior",
+      "Empreendedorismo",
+      "Gestão Comercial",
+      "Gestão da Qualidade",
+      "Gestão da Saúde Pública",
+      "Gestão de Cooperativas",
+      "Gestão de E-Commerce",
+      "Gestão de Farmácia",
+      "Gestão de Investimentos e Mercado Financeiro",
+      "Gestão de Negócios Imobiliários",
+      "Gestão de Recursos Humanos",
+      "Gestão de Turismo",
+      "Gestão Financeira",
+      "Gestão Pública",
+      "Inteligência Artificial e Machine Learning",
+      "Logistica",
+      "Marketing",
+      "Mídias Sociais Digitais",
+      "Negócios e Customer Experience",
+      "Processos Gerenciais",
+      "Secretariado"
+    ],
+    "Pós": [
+      "Gestão de Projetos",
+      "Gestão Estratégica de Esportes",
+      "Gestão Comercial e Inteligência de Mercado",
+      "Gestão de Cooperativas de Crédito",
+      "Gestão de Pessoas: Treinamento e Desenvolvimento",
+      "Liderança e Gestão de Equipes",
+      "Agronegócio",
+      "Coaching aplicado à Gestão de Pessoas",
+      "Coaching com Enfase em Mentoring para Gestão de Pessoas",
+      "Gestão da Comunicação Organizacional",
+      "Gestão de Negócios e Inovação",
+      "Gestão de Projetos e Negócios Sociais",
+      "Gestão do Conhecimento nas Organizações",
+      "Planejamento e Estratégia Organizacional",
+      "Supply Chain Management: Gerenciamento da Cadeia de Suprimentos",
+      "Administração Financeira",
+      "Administração Pública",
+      "Auditoria, Contabilidade e Pericia Contábil",
+      "Comunicação Empresarial e Marketing Digital",
+      "Desenvolvimento Profissional",
+      "Design Thinking e Criatividade nas Organizações",
+      "Empreendimentos e Negócios Imobiliários",
+      "Engenharia e Gestão da Produção",
+      "Gastronomia Funcional e Natural",
+      "Gestão da Qualidade",
+      "Gestão de Custos e Planejamento Estratégico",
+      "Gestão de Pessoas na Administração Pública",
+      "Gestão do Comportamento e da Interatividade em Organizações",
+      "Gestão e Planejamento",
+      "Gestão Estratégica de Negócios",
+      "Gestão Estratégica de Pessoas",
+      "Gestão Estratégica do Varejo",
+      "Gestão Estratégica em Negócios Gastronômicos",
+      "Governança Corporativa e Gestão Estratégica",
+      "Inovação e Empreendedorismo Social",
+      "Liderança Inovadora",
+      "Logistica",
+      "Marketing",
       "Marketing Digital",
-      "Comunicação Estratégica",
-      "Gestão de Mídias"
+      "Marketing e Mídias Digitais",
+      "Mercado Financeiro e Banking",
+      "Moda e Negócio",
+      "Negócios Ágeis",
+      "Negócios Digitais e Inovação",
+      "Planejamento e Gestão de Trânsito",
+      "Planejamento e Organização de Eventos",
+      "Projeto de Interiores",
+      "Sistema Financeiro e Mercado de Capitais",
+      "Administração de Pessoas Novo",
+      "Recursos Humanos NOVO",
+      "Psicologia Positiva e Coaching"
     ]
   },
-  "Saúde Animal": {
+  "JURÍDICO E SEGURANÇA": {
     "Graduação": [
-      "Medicina Veterinária",
-      "Zootecnia",
-      "Agropecuária"
+      "Criminologia",
+      "Gestão de Segurança Privada",
+      "Gestão de Serviços Judiciais e Notariais",
+      "Investigação Forense e Perícia Criminal",
+      "Segurança Pública",
+      "Serviço Social SEM"
     ],
     "Pós": [
-      "Gestão de Clínicas Veterinárias",
-      "Medicina Veterinária Preventiva"
+      "Ciência Política",
+      "Direito Imobiliário",
+      "Direitos Humanos e Realidades Regionais",
+      "Educação Social e Cidadania",
+      "Estudos Bíblicos no Antigo Testamento",
+      "Estudos Bíblicos no Novo Testamento",
+      "Fashion Law - Direito da Moda",
+      "Gestão do Sistema Único da Assistência Social",
+      "Governança Corporativa e Responsabilidade Social",
+      "Meio Ambiente e Sustentabilidade",
+      "Políticas Públicas e Municipalidade",
+      "Direito Civil Novo",
+      "Direito Penal Novo",
+      "Direito Trabalhista Novo"
     ]
   },
-  "Agrárias e Meio Ambiente": {
+  "SAÚDE ANIMAL": {
+    "Graduação": ["Bem-Estar Animal SEMI"],
+    "Pós": []
+  },
+  "SAÚDE E BEM-ESTAR": {
     "Graduação": [
-      "Engenharia Ambiental",
-      "Agronomia",
-      "Ciência e Tecnologia de Alimentos"
+      "Biomedicina SEMI",
+      "Ciência da Felicidade SEMI",
+      "Educação Fisica SEMI",
+      "Estética e Cosmética SEMI",
+      "Farmácia SEMI",
+      "Fisioterapia SEMI",
+      "Fonoaudiologia SEMI Gava",
+      "Gerontologia SEMI",
+      "Gestão Hospitalar",
+      "Nutrição SEMI",
+      "Podologia SEMI",
+      "Radiologia SEMI",
+      "Terapia Ocupacional SEMI",
+      "Terapias Integrativas e Complementares SEMI"
     ],
     "Pós": [
+      "Acupuntura e Técnicas Complementares NOVO",
+      "Análises Clinicas NOVO",
+      "Auditoria e Governança Clínica em Saúde NOVO",
+      "Auditoria em Saúde NOVO",
+      "Cuidados Paliativos e Tanatologia NOVO",
+      "Enfermagem do Trabalho",
+      "Enfermagem em Cardiologia e Hemodinâmica NOVO",
+      "Enfermagem em Cuidados Intensivos Neonatais e Pediátricos NOVO",
+      "Enfermagem em Estomaterapia NOVO",
+      "Enfermagem em Nefrologia NOVO",
+      "Enfermagem em Pediatria e Neonatologia NOVO",
+      "Enfermagem em Unidade de Terapia Intensiva NOVO",
+      "Enfermagem em Urgência e Emergência NOVO",
+      "Estética e Cosmética: Mercado e Procedimentos",
+      "Ética e Regulação na Saúde Digital NOVO",
+      "Farmácia Hospitalar e Clínica NOVO",
+      "Farmacologia Aplicada à Clínica e Prescrição Farmacêutica NOVO",
+      "Fisiologia do Exercício",
+      "Fisioterapia Cardiorrespiratória NOVO",
+      "Fisioterapia em Gerontologia e Reabilitação do Idoso NOVO",
+      "Fisioterapia em Reabilitação Neurológica NOVO",
+      "Fisioterapia em Terapia Intensiva NOVO",
+      "Fisioterapia Pélvica Funcional NOVO",
+      "Fisioterapia Traumato-Ortopédica Funcional NOVO",
+      "Fonoaudiologia com Ênfase em Audiologia e Reabilitação Auditiva NOVO",
+      "Fonoaudiologia Hospitalar e Reabilitação NOVO",
+      "Gestão da Qualidade e Segurança do Paciente",
+      "Gestão da Qualidade em Saúde",
+      "Gestão Estratégica de Organizações da Saúde",
+      "Gestão Hospitalar",
+      "Hematologia Clínica NOVO",
+      "Higiene e Inspeção de Alimentos NOVO",
+      "Higiene Ocupacional",
+      "Inteligência Artificial Aplicada à Saúde NOVO",
+      "Neurociências Aplicadas à Saúde e Bem-Estar NOVO",
+      "Nutrição Clínica NOVO",
+      "Nutrição e Alta Performance Esportiva",
+      "Nutrição Estética Funcional e Marketing Estratégico NOVO",
+      "Nutrição Funcional",
+      "Nutrição Materno-Infantil NOVO",
+      "Personal Training",
+      "Podologia Clínica NOVO",
+      "Práticas Integrativas e Complementares (PICs) NOVO",
+      "Psicologia Clínica NOVO",
+      "Saúde Coletiva NOVO",
+      "Saúde do Idoso e Gerontologia NOVO",
+      "Saúde Mental e Atenção Psicossocial NOVO",
+      "Saúde Mental na Infância e Adolescência NOVO",
+      "Saúde Multidisciplinar em Oncologia NOVO",
+      "Saúde Pública",
+      "Telemedicina e Saúde Digital NOVO",
+      "Terapia Cognitivo-Comportamental NOVO",
+      "Vigilância Sanitária NOVO"
+    ]
+  },
+  "MEIO AMBIENTE": {
+    "Graduação": [
+      "Biotecnologia Ambiental",
+      "Educação Ambiental e Sustentabilidade",
+      "Perícia e Auditoria Ambiental",
+      "Gestão Ambiental"
+    ],
+    "Pós": [
+      "Enfermagem do Trabalho",
+      "Fisiologia do Exercício",
+      "Saúde Pública",
+      "Biotecnologia Ambiental",
+      "Educação Ambiental e Sustentabilidade",
+      "Estética e Cosmética: Mercado e Procedimentos",
       "Gestão Ambiental",
-      "Agronegócios"
+      "Gestão da Qualidade em Saúde",
+      "Gestão Estratégica de Organizações da Saúde",
+      "Higiene Ocupacional",
+      "Nutrição e Alta Performance Esportiva",
+      "Nutrição Funcional",
+      "Perícia e Auditoria Ambiental",
+      "Personal Training",
+      "Gestão Hospitalar Novo"
     ]
   },
-  "Alimentos e Bebidas": {
+  "TECNOLOGIA E INOVAÇÃO": {
     "Graduação": [
-      "Nutrição",
-      "Gastronomia",
-      "Tecnologia de Alimentos"
+      "Big Data e Análise de Dados Organizacionais",
+      "Ciência de Dados",
+      "Construção de Narrativas e Copywriting NOVO",
+      "Desenvolvimento de Sistemas com JAVA",
+      "Desenvolvimento de Sistemas com Python",
+      "Design de UX",
+      "Engenharia de Segurança do Trabalho",
+      "Gestão de Tecnologia da Informação Corporativa",
+      "Inclusão e Acessibilidade na Era Digital NOVO",
+      "Inovação e Gestão de Conteúdo para a Economia Criativa",
+      "Inovação e Negócios Disruptivos",
+      "Inteligência Artificial Aplicada a Growth Marketing NOVO",
+      "MBA em Economia Criativa, Cultura e Inovação",
+      "MBA em Inovação e Criatividade no Ambiente Empresarial",
+      "MBA em Marketing, Criatividade e Inovação",
+      "Prática de Metodologias Ágeis",
+      "Qualidade e Teste de Software NOVO",
+      "Tecnologia e Cultura Digital Aplicadas à Educação"
     ],
     "Pós": [
-      "Gestão de Restaurantes",
-      "Ciência e Tecnologia de Alimentos"
-    ]
-  },
-  "Engenharias e Arquitetura": {
-    "Graduação": [
-      "Engenharia Civil",
-      "Engenharia Mecânica",
-      "Engenharia Elétrica",
-      "Engenharia de Produção",
-      "Arquitetura e Urbanismo"
-    ],
-    "Pós": [
-      "Gestão da Construção Civil",
-      "Engenharia de Segurança do Trabalho"
-    ]
-  },
-  "Saúde e Bem-Estar": {
-    "Graduação": [
-      "Enfermagem",
-      "Fisioterapia",
-      "Educação Física",
-      "Psicologia"
-    ],
-    "Pós": [
-      "Gestão em Saúde",
-      "Psicologia Clínica",
-      "Fisioterapia Avançada"
-    ]
-  },
-  "Tecnologia": {
-    "Graduação": [
-      "Ciência da Computação",
-      "Sistemas de Informação",
-      "Análise e Desenvolvimento de Sistemas",
-      "Redes de Computadores"
-    ],
-    "Pós": [
-      "Segurança da Informação",
-      "Inteligência Artificial",
-      "Big Data e Analytics"
+      "Ciência de Dados",
+      "Inovação e Criatividade no Ambiente Empresarial",
+      "Marketing, Criatividade e Inovação",
+      "Executivo em Economia Criativa, Cultura e Inovação",
+      "Desenvolvimento de Sistemas com JAVA",
+      "Desenvolvimento de Sistemas com Python",
+      "Design de UX",
+      "Engenharia de Segurança do Trabalho",
+      "Inovação e Gestão de Conteúdo para a Economia Criativa",
+      "Inovação e Negócios Disruptivos",
+      "Prática de Metodologias Ágeis"
     ]
   }
 };
@@ -473,5 +708,6 @@ function showCongrats(nomeCompleto){
 </script>
 </body>
 </html>
+
 
 
