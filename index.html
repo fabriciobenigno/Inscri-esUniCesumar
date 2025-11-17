@@ -194,18 +194,148 @@ window.addEventListener("load",()=>{
 
 /* Dropdown de áreas e cursos */
 const areas = {
-  "Educação": { "Graduação": ["Pedagogia","Licenciatura em Matemática"], "Pós": ["Gestão Educacional"] },
-  "Artes e Design": { "Graduação": ["Design Gráfico","Artes Visuais"], "Pós": ["Design de Interiores"] },
-  "Gestão de Negócios": { "Graduação": ["Administração","Marketing"], "Pós": ["MBA Gestão de Projetos"] },
-  "Jurídico e Segurança": { "Graduação": [], "Pós": [] },
-  "Comunicação": { "Graduação": [], "Pós": [] },
-  "Saúde Animal": { "Graduação": [], "Pós": [] },
-  "Agrárias e Meio Ambiente": { "Graduação": [], "Pós": [] },
-  "Alimentos e Bebidas": { "Graduação": [], "Pós": [] },
-  "Engenharias e Arquitetura": { "Graduação": [], "Pós": [] },
-  "Saúde e Bem-Estar": { "Graduação": [], "Pós": [] },
-  "Tecnologia": { "Graduação": [], "Pós": [] }
+  "Educação": {
+    "Graduação": [
+      "Pedagogia",
+      "Licenciatura em Matemática",
+      "Licenciatura em Letras",
+      "Licenciatura em História",
+      "Licenciatura em Geografia",
+      "Licenciatura em Ciências Biológicas"
+    ],
+    "Pós": [
+      "Gestão Educacional",
+      "Educação Inclusiva",
+      "Psicopedagogia"
+    ]
+  },
+  "Artes e Design": {
+    "Graduação": [
+      "Design Gráfico",
+      "Artes Visuais",
+      "Moda",
+      "Fotografia",
+      "Publicidade e Propaganda"
+    ],
+    "Pós": [
+      "Design de Interiores",
+      "Ilustração e Animação",
+      "Direção de Arte"
+    ]
+  },
+  "Gestão de Negócios": {
+    "Graduação": [
+      "Administração",
+      "Marketing",
+      "Gestão Financeira",
+      "Gestão de Recursos Humanos",
+      "Comércio Exterior"
+    ],
+    "Pós": [
+      "MBA Gestão de Projetos",
+      "MBA Marketing Digital",
+      "MBA Finanças Corporativas"
+    ]
+  },
+  "Jurídico e Segurança": {
+    "Graduação": [
+      "Direito",
+      "Segurança Pública",
+      "Gestão de Segurança Privada"
+    ],
+    "Pós": [
+      "Direito Empresarial",
+      "Direito Tributário",
+      "Direito Penal"
+    ]
+  },
+  "Comunicação": {
+    "Graduação": [
+      "Jornalismo",
+      "Publicidade e Propaganda",
+      "Relações Públicas",
+      "Cinema e Audiovisual"
+    ],
+    "Pós": [
+      "Marketing Digital",
+      "Comunicação Estratégica",
+      "Gestão de Mídias"
+    ]
+  },
+  "Saúde Animal": {
+    "Graduação": [
+      "Medicina Veterinária",
+      "Zootecnia",
+      "Agropecuária"
+    ],
+    "Pós": [
+      "Gestão de Clínicas Veterinárias",
+      "Medicina Veterinária Preventiva"
+    ]
+  },
+  "Agrárias e Meio Ambiente": {
+    "Graduação": [
+      "Engenharia Ambiental",
+      "Agronomia",
+      "Ciência e Tecnologia de Alimentos"
+    ],
+    "Pós": [
+      "Gestão Ambiental",
+      "Agronegócios"
+    ]
+  },
+  "Alimentos e Bebidas": {
+    "Graduação": [
+      "Nutrição",
+      "Gastronomia",
+      "Tecnologia de Alimentos"
+    ],
+    "Pós": [
+      "Gestão de Restaurantes",
+      "Ciência e Tecnologia de Alimentos"
+    ]
+  },
+  "Engenharias e Arquitetura": {
+    "Graduação": [
+      "Engenharia Civil",
+      "Engenharia Mecânica",
+      "Engenharia Elétrica",
+      "Engenharia de Produção",
+      "Arquitetura e Urbanismo"
+    ],
+    "Pós": [
+      "Gestão da Construção Civil",
+      "Engenharia de Segurança do Trabalho"
+    ]
+  },
+  "Saúde e Bem-Estar": {
+    "Graduação": [
+      "Enfermagem",
+      "Fisioterapia",
+      "Educação Física",
+      "Psicologia"
+    ],
+    "Pós": [
+      "Gestão em Saúde",
+      "Psicologia Clínica",
+      "Fisioterapia Avançada"
+    ]
+  },
+  "Tecnologia": {
+    "Graduação": [
+      "Ciência da Computação",
+      "Sistemas de Informação",
+      "Análise e Desenvolvimento de Sistemas",
+      "Redes de Computadores"
+    ],
+    "Pós": [
+      "Segurança da Informação",
+      "Inteligência Artificial",
+      "Big Data e Analytics"
+    ]
+  }
 };
+
 
 const dropdown=document.getElementById("dropdown-interesse");
 const display=document.getElementById("dropdown-display");
@@ -343,4 +473,5 @@ function showCongrats(nomeCompleto){
 </script>
 </body>
 </html>
+
 
