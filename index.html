@@ -2,16 +2,24 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Inscrição Curso</title>
-<link rel="icon" type="image/x-icon" href="tata.png?v=1">
-<link rel="shortcut icon" href="tata.ico?v=1">
+<link rel="icon" type="image/x-icon" href="simbolo.ico?v=1">
+<link rel="shortcut icon" href="tata.png?v=1">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif}
 html,body{height:100%}
-body{background:linear-gradient(135deg,#004aad,#007bff);display:flex;justify-content:center;align-items:center;padding:20px;overflow:auto;}
+body{
+  background:linear-gradient(135deg,#004aad,#007bff);
+  display:flex;justify-content:center;align-items:center;
+  padding:20px;overflow:auto;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  scroll-behavior:smooth;
+  padding-top: env(safe-area-inset-top);
+}
 
 /* Splash */
 #splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
@@ -26,7 +34,7 @@ body{background:linear-gradient(135deg,#004aad,#007bff);display:flex;justify-con
 /* Tutor (left column) */
 #tutor{flex:0 0 380px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:#f6f9ff}
 #tutor #logo-tutor{width:330px;margin-bottom:14px;object-fit:contain}
-#tutor img.tutor-photo{width:200px;height:200px;border-radius:50%;margin-bottom:14px;object-fit:contain}
+#tutor img.tutor-photo{width:200px;height:200px;border-radius:50%;margin-bottom:14px;object-fit:cover}
 .tutor-name{color:#004aad;font-size:1.45rem;font-weight:700;text-align:center;margin-bottom:6px}
 .tutor-role{color:#333;font-size:1rem;text-align:center;margin-bottom:16px}
 
@@ -42,36 +50,45 @@ body{background:linear-gradient(135deg,#004aad,#007bff);display:flex;justify-con
 #form-container h1{color:#004aad;font-size:1.9rem;margin-bottom:12px}
 form{display:flex;flex-direction:column;gap:10px}
 input[type="text"],input[type="tel"],input[type="email"],input[type="date"]{
-  width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem
+  width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem;background:#fff
 }
+input::placeholder{color:#999}
 input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,255,0.08)}
 .small-note{font-size:.9rem;color:#666;margin-top:4px}
 
 /* Dropdown custom */
 #dropdown-interesse{position:relative}
 #dropdown-display{display:block;padding:12px;border-radius:8px;border:1px solid #d0d6e0;background:#fff;cursor:pointer}
-#dropdown-options{position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;max-height:220px;overflow:auto;display:none;z-index:50}
+#dropdown-options{
+  position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;overflow:auto;display:none;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,0.12);
+  -webkit-overflow-scrolling:touch;
+}
 #dropdown-options div{padding:10px;cursor:pointer}
 #dropdown-options div:hover{background:#f2f6ff}
+.categoria-title{font-weight:700;padding:10px;background:#f6f9ff;margin-top:6px;border-radius:6px}
 
 /* Submit */
-.btn{background:#007bff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .12s;position:relative}
+.btn{background:#007bff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .12s}
 .btn:hover{transform:scale(1.02);background:#0056b3}
-
-/* Loading dots */
-.btn.loading::after{
-  content:"...";
-  position:absolute;
-  right:12px;
-}
+.btn[disabled]{opacity:.7;cursor:not-allowed}
+.btn.loading::after { content: ''; display: inline-block; width: 1em; text-align: left; margin-left: 6px; animation: dots 1s steps(5,end) infinite; }
+@keyframes dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}
 
 /* Congrats overlay */
 #congrats{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9998;overflow:hidden}
-#congrats video#confete-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;}
-#congrats-card{position:relative;z-index:2;background:rgba(255,255,255,0.9);padding:36px;border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.18);text-align:center;max-width:520px}
+#congrats video#confete-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;pointer-events:none;}
+#congrats-card{
+  position:relative;
+  z-index:2;
+  background:rgba(255,255,255,0.9);
+  padding:36px;
+  border-radius:14px;
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  text-align:center;
+  max-width:520px;
+}
 #congrats-card h2{color:#004aad;margin-bottom:10px}
-#congrats-card .insta-btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:#fff;background:#007bff;padding:10px 20px;border-radius:8px;font-weight:700;margin-top:15px;transition:transform .2s}
-#congrats-card .insta-btn:hover{transform:scale(1.05);background:#0056b3}
+#congrats-card a.contact-btn{display:inline-flex;justify-content:center;margin:15px auto 0 auto;width:180px}
 
 /* Responsive */
 @media (max-width:1024px){
@@ -81,209 +98,247 @@ input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,2
   #tutor img.tutor-photo{width:160px;height:160px}
 }
 @media (max-width:640px){
-  #app{padding:18px;flex-direction:column}
-  #tutor{padding-top:40px;padding-bottom:20px;align-items:center} /* mais espaço topo no celular */
-  #tutor #logo-tutor{max-width:220px;height:auto}
-  #tutor img.tutor-photo{width:140px;height:140px;object-fit:contain;margin-bottom:12px}
-  .contact-btn{width:140px}
   #splash img{width:300px}
+  #tutor #logo-tutor{width:220px}
+  #tutor img.tutor-photo{width:140px;height:140px}
+  .contact-btn{width:140px}
+  #app{padding:18px}
+  #form-container{padding:20px}
+  #dropdown-display{padding:10px}
+  #dropdown-options{border-radius:10px}
+  #congrats-card{padding:22px;margin:12px}
+  
+  /* Espaço extra só para celular */
+  #tutor {padding-top:140px;}
 }
 </style>
 </head>
 <body>
 
-<!-- Splash -->
 <div id="splash">
   <img src="tata.png" alt="Logo">
   <p>Carregando...</p>
 </div>
 
-<!-- App -->
 <div id="app" role="main" aria-labelledby="page-title" style="display:none">
 
-  <!-- Tutor (left) -->
-  <aside id="tutor" aria-label="Informações do tutor">
-    <img id="logo-tutor" src="tata.png" alt="Logo">
-    <img class="tutor-photo" src="fabricio-benigno.jpg" alt="Foto do tutor Fabricio Benigno">
-    <div class="tutor-name">Fabricio Benigno</div>
-    <div class="tutor-role">Tutor e Orientador</div>
+<aside id="tutor" aria-label="Informações do tutor">
+  <img id="logo-tutor" src="tata.png" alt="Logo">
+  <img class="tutor-photo" src="fabricio-benigno.jpg" alt="Foto do tutor Fabricio Benigno">
+  <div class="tutor-name">Fabricio Benigno</div>
+  <div class="tutor-role">Tutor e Orientador</div>
 
-    <div class="contact-list" aria-hidden="false">
-      <a class="contact-btn" href="https://wa.me/5585921695620" target="_blank" rel="noopener noreferrer">
-        <img src="whatsapp.ico" alt="WhatsApp"> WhatsApp
-      </a>
+  <div class="contact-list">
+    <a class="contact-btn" href="https://wa.me/5585921695620" target="_blank" rel="noopener noreferrer">
+      <img src="whatsapp.ico" alt="WhatsApp"> WhatsApp
+    </a>
+    <a class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
+      <img src="instagram.ico" alt="Instagram"> Instagram
+    </a>
+  </div>
+</aside>
 
-      <a class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
-        <img src="instagram.ico" alt="Instagram"> Instagram
-      </a>
+<section id="form-container" aria-labelledby="page-title">
+  <h1 id="page-title">Cadastro de Inscrição</h1>
+  <form id="form-inscricao" onsubmit="handleSubmit(event)" autocomplete="off" novalidate>
+    <input id="nome" type="text" placeholder="Nome Completo" required />
+    <input id="telefone" type="tel" placeholder="Número" required />
+    <input id="cpf" type="text" placeholder="CPF" required />
+    <input id="email" type="email" placeholder="Email" required />
+    <input id="nascimento" type="date" placeholder="Data de Nascimento" required />
+    <input id="endereco" type="text" placeholder="Endereço" required />
+    <input id="cep" type="text" placeholder="CEP" required />
+
+    <div id="dropdown-interesse" aria-haspopup="listbox">
+      <div id="dropdown-display" aria-expanded="false" tabindex="0">Área de interesse</div>
+      <div id="dropdown-options" role="listbox" aria-label="Áreas de interesse"></div>
     </div>
-  </aside>
 
-  <!-- Form (right) -->
-  <section id="form-container" aria-labelledby="page-title">
-    <h1 id="page-title">Cadastro de Inscrição</h1>
-
-    <form id="form-inscricao" onsubmit="handleSubmit(event)" autocomplete="off" novalidate>
-      <input id="nome" type="text" placeholder="Nome Completo" required />
-      <input id="telefone" type="tel" placeholder="Número" required />
-      <input id="cpf" type="text" placeholder="CPF" required />
-      <input id="email" type="email" placeholder="Email" required />
-      <input id="nascimento" type="date" placeholder="Data de Nascimento" required />
-      <input id="endereco" type="text" placeholder="Endereço" required />
-      <input id="cep" type="text" placeholder="CEP" required />
-
-      <div id="dropdown-interesse" aria-haspopup="listbox">
-        <div id="dropdown-display" aria-expanded="false" tabindex="0">Área de interesse</div>
-        <div id="dropdown-options" role="listbox" aria-label="Áreas de interesse"></div>
-      </div>
-
-      <div class="small-note">Selecione a área antes de enviar.</div>
-
-      <button type="submit" class="btn" aria-label="Enviar inscrição">Enviar Inscrição</button>
-      <div id="success-msg" role="status" aria-live="polite" style="display:none;margin-top:8px;color:green">Inscrição enviada com sucesso!</div>
-    </form>
-  </section>
+    <div class="small-note">Selecione a área antes de enviar.</div>
+    <button type="submit" class="btn">Enviar Inscrição</button>
+  </form>
+</section>
 </div>
 
-<!-- Congrats -->
-<div id="congrats" role="dialog" aria-modal="true" aria-hidden="true">
-  <video autoplay muted loop id="confete-video">
+<div id="congrats" role="dialog" aria-modal="true">
+  <video autoplay muted loop playsinline id="confete-video">
     <source src="confetes.mp4" type="video/mp4">
   </video>
-  <div id="congrats-card">
+  <div id="congrats-card" role="document" aria-labelledby="congrats-title">
+    <img src="festa.ico" alt="" style="width:40px;height:40px;margin-bottom:5px;">
+    <img src="festa.ico" alt="" style="width:40px;height:40px;margin-bottom:10px;">
     <h2 id="congrats-title"></h2>
-    <a class="insta-btn" id="insta-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
-      Ir para Instagram
+    <p>Estarei aqui para te auxiliar em sua jornada acadêmica.</p>
+    <a id="insta-btn" class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
+      <img src="instagram.ico" alt="Instagram" style="width:24px;height:24px;"> Instagram
     </a>
   </div>
 </div>
 
 <script>
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPPOOxKjI2z_DHiN2RfqaKp9fh6Z_rw-GUN3IFVt8wapzeWuNYY8t2gT7OEmFrK9Im/exec";
-const AUTO_REDIRECT_MS = 30000; // 30 segundos
+const AUTO_REDIRECT_MS = 30000;
 
-// Splash
-window.addEventListener("load", () => {
-  setTimeout(()=> {
-    const splash = document.getElementById("splash");
-    splash.style.opacity = 0;
-    setTimeout(()=> {
-      splash.style.display = "none";
-      const app = document.getElementById("app");
-      app.style.display = "flex";
-      requestAnimationFrame(()=>{ app.style.opacity = 1; app.style.transform = "scale(1)"; });
-    }, 500);
-  }, 1200);
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    const splash=document.getElementById("splash");
+    splash.style.opacity=0;
+    setTimeout(()=>{
+      splash.style.display="none";
+      const app=document.getElementById("app");
+      app.style.display="flex";
+      requestAnimationFrame(()=>{ app.style.opacity=1; app.style.transform="scale(1)"; });
+    },500);
+  },1200);
 });
 
-// Dropdown áreas e cursos
-const areas = [
-  { nome: "Educação", cursos:["Graduação 1","Pós Graduação 1"] },
-  { nome: "Artes e Design", cursos:["Graduação 2","Pós Graduação 2"] },
-  { nome: "Gestão de Negócios", cursos:["Graduação 3","Pós Graduação 3"] },
-  { nome: "Jurídico e Segurança", cursos:["Graduação 4","Pós Graduação 4"] },
-  { nome: "Comunicação", cursos:[] },
-  { nome: "Saúde Animal", cursos:[] },
-  { nome: "Agrárias e Meio Ambiente", cursos:[] },
-  { nome: "Alimentos e Bebidas", cursos:[] },
-  { nome: "Engenharias e Arquitetura", cursos:[] },
-  { nome: "Saúde e Bem-Estar", cursos:[] },
-  { nome: "Tecnologia", cursos:[] }
-];
+/* Dropdown de áreas e cursos */
+const areas = {
+  "Educação": { "Graduação": ["Pedagogia","Licenciatura em Matemática"], "Pós": ["Gestão Educacional"] },
+  "Artes e Design": { "Graduação": ["Design Gráfico","Artes Visuais"], "Pós": ["Design de Interiores"] },
+  "Gestão de Negócios": { "Graduação": ["Administração","Marketing"], "Pós": ["MBA Gestão de Projetos"] },
+  "Jurídico e Segurança": { "Graduação": [], "Pós": [] },
+  "Comunicação": { "Graduação": [], "Pós": [] },
+  "Saúde Animal": { "Graduação": [], "Pós": [] },
+  "Agrárias e Meio Ambiente": { "Graduação": [], "Pós": [] },
+  "Alimentos e Bebidas": { "Graduação": [], "Pós": [] },
+  "Engenharias e Arquitetura": { "Graduação": [], "Pós": [] },
+  "Saúde e Bem-Estar": { "Graduação": [], "Pós": [] },
+  "Tecnologia": { "Graduação": [], "Pós": [] }
+};
 
-const dropdown = document.getElementById("dropdown-interesse");
-const display = document.getElementById("dropdown-display");
-const optionsContainer = document.getElementById("dropdown-options");
-let currentCourses = [];
+const dropdown=document.getElementById("dropdown-interesse");
+const display=document.getElementById("dropdown-display");
+const optionsContainer=document.getElementById("dropdown-options");
+let step="area";
+let selectedArea="";
+let submitting=false;
+let redirectTimer=null;
 
-function renderOptions(items){
+function renderOptions(){
   optionsContainer.innerHTML="";
-  items.forEach(item=>{
-    const div = document.createElement("div");
-    div.textContent = item;
-    div.setAttribute("role","option");
-    div.addEventListener("click",(e)=>{
-      e.stopPropagation();
-      if(currentCourses.length && items===currentCourses){
-        display.textContent = item;
-        closeOptions();
-      } else {
-        currentCourses = areas.find(a=>a.nome===item).cursos;
-        renderOptions(currentCourses);
+  if(step==="area"){
+    Object.keys(areas).forEach(area=>{
+      const div=document.createElement("div");
+      div.textContent=area;
+      div.setAttribute("role","option");
+      div.addEventListener("click",e=>{
+        e.stopPropagation();
+        selectedArea=area;
+        step="curso";
+        renderOptions();
+      });
+      optionsContainer.appendChild(div);
+    });
+  } else if(step==="curso"){
+    const cursos=areas[selectedArea]||{};
+    Object.keys(cursos).forEach(cat=>{
+      if(cursos[cat] && cursos[cat].length>0){
+        const catDiv=document.createElement("div");
+        catDiv.textContent=cat;
+        catDiv.className="categoria-title";
+        optionsContainer.appendChild(catDiv);
+        cursos[cat].forEach(curso=>{
+          const div=document.createElement("div");
+          div.textContent=curso;
+          div.setAttribute("role","option");
+          div.addEventListener("click",e=>{
+            e.stopPropagation();
+            display.textContent=curso;
+            closeOptions();
+            step="area";
+            selectedArea="";
+          });
+          optionsContainer.appendChild(div);
+        });
       }
     });
-    optionsContainer.appendChild(div);
-  });
-}
-
-function abrirOptions(){
-  renderOptions(areas.map(a=>a.nome));
+  }
+  const rect=dropdown.getBoundingClientRect();
+  const maxHeight=Math.max(rect.top-10,120);
+  optionsContainer.style.bottom=rect.height+"px";
+  optionsContainer.style.top="auto";
+  optionsContainer.style.maxHeight=maxHeight+"px";
+  optionsContainer.style.overflowY="auto";
   optionsContainer.style.display="block";
   display.setAttribute("aria-expanded","true");
-  ajustarDropdownPosicao();
 }
 
-function closeOptions(){
-  optionsContainer.style.display="none";
-  display.setAttribute("aria-expanded","false");
-  currentCourses=[];
-}
-
-function ajustarDropdownPosicao(){
-  const rect = dropdown.getBoundingClientRect();
-  optionsContainer.style.top = "auto";
-  optionsContainer.style.bottom = rect.height + "px";
-  optionsContainer.style.maxHeight = rect.top - 10 + "px";
-}
+function openOptions(){ renderOptions(); }
+function closeOptions(){ optionsContainer.style.display="none"; display.setAttribute("aria-expanded","false"); }
 
 display.addEventListener("click",e=>{
   e.stopPropagation();
-  if(optionsContainer.style.display==="block") closeOptions(); else abrirOptions();
+  step="area";
+  selectedArea="";
+  optionsContainer.style.display==="block"?closeOptions():openOptions();
 });
-
 document.addEventListener("click",()=>{ closeOptions(); });
 
-// Form submit
+function setButtonLoading(on){
+  const btn=document.querySelector(".btn");
+  if(!btn) return;
+  if(on){
+    btn.disabled=true;
+    btn.textContent="Enviando";
+    btn.classList.add("loading");
+  } else {
+    btn.disabled=false;
+    btn.textContent="Enviar Inscrição";
+    btn.classList.remove("loading");
+  }
+}
+
 async function handleSubmit(e){
   e.preventDefault();
-  const btn = document.querySelector(".btn");
-  btn.classList.add("loading");
+  if(submitting) return;
+  const nome=document.getElementById("nome").value.trim();
+  const telefone=document.getElementById("telefone").value.trim();
+  const cpf=document.getElementById("cpf").value.trim();
+  const email=document.getElementById("email").value.trim();
+  const nascimento=document.getElementById("nascimento").value;
+  const endereco=document.getElementById("endereco").value.trim();
+  const cep=document.getElementById("cep").value.trim();
+  const areaInteresse=display.textContent.trim();
 
-  const nome = document.getElementById("nome").value.trim();
-  const telefone = document.getElementById("telefone").value.trim();
-  const cpf = document.getElementById("cpf").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const nascimento = document.getElementById("nascimento").value;
-  const endereco = document.getElementById("endereco").value.trim();
-  const cep = document.getElementById("cep").value.trim();
-  const areaInteresse = display.textContent.trim();
+  if(!nome || !telefone || !cpf || !email || !nascimento || !endereco || !cep){
+    alert("Preencha todos os campos.");
+    return;
+  }
+  if(!areaInteresse || areaInteresse==="Área de interesse"){
+    alert("Selecione a Área de Interesse.");
+    return;
+  }
 
-  if(!nome || !telefone || !cpf || !email || !nascimento || !endereco || !cep){ alert("Preencha todos os campos."); btn.classList.remove("loading"); return; }
-  if(!areaInteresse || areaInteresse==="Área de interesse"){ alert("Selecione a Área de Interesse."); btn.classList.remove("loading"); return; }
-
-  const payload = { nome, telefone, cpf, email, nascimento, endereco, cep, areaInteresse };
-
+  const payload={nome,telefone,cpf,email,nascimento,endereco,cep,areaInteresse};
+  submitting=true;
+  setButtonLoading(true);
   try{
     await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
     document.getElementById("form-inscricao").reset();
-    display.textContent = "Área de interesse";
+    display.textContent="Área de interesse";
     showCongrats(nome);
-  }catch(err){ alert("Erro ao enviar."); console.error(err); btn.classList.remove("loading"); }
+  } catch(err){ console.error(err); alert("Erro ao enviar."); }
+  setTimeout(()=>{ submitting=false; setButtonLoading(false); },700);
 }
 
-window.handleSubmit = handleSubmit;
+window.handleSubmit=handleSubmit;
 
 function showCongrats(nomeCompleto){
-  const [primeiro, ...resto] = nomeCompleto.split(" ");
-  const segundo = resto.length>0?resto[0]:"";
-  const titulo = document.getElementById("congrats-title");
-  titulo.textContent = `Parabéns ${primeiro} ${segundo} por ter feito sua matrícula! Fico muito feliz por ter participado desse passo para seu crescimento pessoal e profissional!`;
-
-  const congrats = document.getElementById("congrats");
+  const [primeiro,...resto]=nomeCompleto.split(" ");
+  const segundo=resto.length>0?resto[0]:"";
+  const titulo=document.getElementById("congrats-title");
+  titulo.textContent=`Parabéns ${primeiro} ${segundo}!`;
+  const congrats=document.getElementById("congrats");
   congrats.style.display="flex";
 
-  const instaBtn = document.getElementById("insta-btn");
-  setTimeout(()=>{ window.location.href = instaBtn.href; }, AUTO_REDIRECT_MS);
+  const confeteVideo=document.getElementById("confete-video");
+  confeteVideo.currentTime=0;
+  confeteVideo.play().catch(()=>{});
+
+  const instaBtn=document.getElementById("insta-btn");
+  if(redirectTimer) clearTimeout(redirectTimer);
+  redirectTimer=setTimeout(()=>{ window.location.href=instaBtn.href; },AUTO_REDIRECT_MS);
 }
 </script>
 </body>
