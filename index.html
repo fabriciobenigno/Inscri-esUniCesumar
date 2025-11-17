@@ -9,104 +9,105 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif}
-  html,body{height:100%}
-  body{
-    background:linear-gradient(135deg,#004aad,#007bff);
-    display:flex;justify-content:center;align-items:center;
-    padding:20px;overflow:auto;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    scroll-behavior:smooth;
-    padding-top: env(safe-area-inset-top);
-  }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Roboto',sans-serif}
+html,body{height:100%}
+body{
+  background:linear-gradient(135deg,#004aad,#007bff);
+  display:flex;justify-content:center;align-items:center;
+  padding:20px;overflow:auto;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  scroll-behavior:smooth;
+  padding-top: env(safe-area-inset-top);
+}
 
-  /* Splash */
-  #splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
-  #splash img{width:350px;margin-bottom:20px;animation:fadeInDown 1.2s}
-  #splash p{color:#004aad;font-size:1.25rem;font-weight:500;animation:fadeIn 1.2s}
-  @keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+/* Splash */
+#splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
+#splash img{width:350px;margin-bottom:20px;animation:fadeInDown 1.2s}
+#splash p{color:#004aad;font-size:1.25rem;font-weight:500;animation:fadeIn 1.2s}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-  /* App card */
-  #app{display:flex;flex-direction:row;background:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1000px;width:100%;overflow:hidden;opacity:0;transform:scale(.98);transition:opacity .5s,transform .5s}
+/* App card */
+#app{display:flex;flex-direction:row;background:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1000px;width:100%;overflow:hidden;opacity:0;transform:scale(.98);transition:opacity .5s,transform .5s}
 
-  /* Tutor (left column) */
-  #tutor{flex:0 0 380px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:#f6f9ff}
-  #tutor #logo-tutor{width:330px;margin-bottom:14px;object-fit:contain}
-  #tutor img.tutor-photo{width:200px;height:200px;border-radius:50%;margin-bottom:14px;object-fit:cover}
-  .tutor-name{color:#004aad;font-size:1.45rem;font-weight:700;text-align:center;margin-bottom:6px}
-  .tutor-role{color:#333;font-size:1rem;text-align:center;margin-bottom:16px}
+/* Tutor (left column) */
+#tutor{flex:0 0 380px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:#f6f9ff}
+#tutor #logo-tutor{width:330px;margin-bottom:14px;object-fit:contain}
+#tutor img.tutor-photo{width:200px;height:200px;border-radius:50%;margin-bottom:14px;object-fit:cover}
+.tutor-name{color:#004aad;font-size:1.45rem;font-weight:700;text-align:center;margin-bottom:6px}
+.tutor-role{color:#333;font-size:1rem;text-align:center;margin-bottom:16px}
 
-  /* Contact buttons */
-  .contact-list{display:flex;flex-direction:column;gap:10px;margin-top:6px}
-  .contact-btn{display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;border-radius:8px;padding:10px 14px;color:#004aad;text-decoration:none;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.06);width:160px;transition:transform .18s,background .18s,color .18s}
-  .contact-btn img{width:32px;height:32px;display:block}
-  .contact-btn:hover{transform:translateY(-4px);background:#007bff;color:#fff}
-  .contact-btn:hover img{filter:brightness(0) invert(1)}
+/* Contact buttons */
+.contact-list{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.contact-btn{display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;border-radius:8px;padding:10px 14px;color:#004aad;text-decoration:none;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.06);width:160px;transition:transform .18s,background .18s,color .18s}
+.contact-btn img{width:32px;height:32px;display:block}
+.contact-btn:hover{transform:translateY(-4px);background:#007bff;color:#fff}
+.contact-btn:hover img{filter:brightness(0) invert(1)}
 
-  /* Form container (right) */
-  #form-container{flex:1;padding:28px 30px;display:flex;flex-direction:column;justify-content:center}
-  #form-container h1{color:#004aad;font-size:1.9rem;margin-bottom:12px}
-  form{display:flex;flex-direction:column;gap:10px}
-  input[type="text"],input[type="tel"],input[type="email"],input[type="date"]{
-    width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem;background:#fff
-  }
-  input::placeholder{color:#999}
-  input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,255,0.08)}
-  .small-note{font-size:.9rem;color:#666;margin-top:4px}
+/* Form container (right) */
+#form-container{flex:1;padding:28px 30px;display:flex;flex-direction:column;justify-content:center}
+#form-container h1{color:#004aad;font-size:1.9rem;margin-bottom:12px}
+form{display:flex;flex-direction:column;gap:10px}
+input[type="text"],input[type="tel"],input[type="email"],input[type="date"]{
+  width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem;background:#fff
+}
+input::placeholder{color:#999}
+input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,255,0.08)}
+.small-note{font-size:.9rem;color:#666;margin-top:4px}
 
-  /* Dropdown custom */
-  #dropdown-interesse{position:relative}
-  #dropdown-display{display:block;padding:12px;border-radius:8px;border:1px solid #d0d6e0;background:#fff;cursor:pointer}
-  #dropdown-options{
-    position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;overflow:auto;display:none;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,0.12);
-    -webkit-overflow-scrolling:touch;
-  }
-  #dropdown-options div{padding:10px;cursor:pointer}
-  #dropdown-options div:hover{background:#f2f6ff}
-  .categoria-title{font-weight:700;padding:10px;background:#f6f9ff;margin-top:6px;border-radius:6px}
+/* Dropdown custom */
+#dropdown-interesse{position:relative}
+#dropdown-display{display:block;padding:12px;border-radius:8px;border:1px solid #d0d6e0;background:#fff;cursor:pointer}
+#dropdown-options{
+  position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;overflow:auto;display:none;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,0.12);
+  -webkit-overflow-scrolling:touch;
+}
+#dropdown-options div{padding:10px;cursor:pointer}
+#dropdown-options div:hover{background:#f2f6ff}
+.categoria-title{font-weight:700;padding:10px;background:#f6f9ff;margin-top:6px;border-radius:6px}
 
-  /* Submit */
-  .btn{background:#007bff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .12s}
-  .btn:hover{transform:scale(1.02);background:#0056b3}
-  .btn[disabled]{opacity:.7;cursor:not-allowed}
-  .btn.loading::after { content: ''; display: inline-block; width: 1em; text-align: left; margin-left: 6px; animation: dots 1s steps(5,end) infinite; }
-  @keyframes dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}
+/* Submit */
+.btn{background:#007bff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .12s}
+.btn:hover{transform:scale(1.02);background:#0056b3}
+.btn[disabled]{opacity:.7;cursor:not-allowed}
+.btn.loading::after { content: ''; display: inline-block; width: 1em; text-align: left; margin-left: 6px; animation: dots 1s steps(5,end) infinite; }
+@keyframes dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}
 
-  /* Congrats overlay */
-  #congrats{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9998;overflow:hidden}
-  #congrats video#confete-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;pointer-events:none;}
-  #congrats-card{
-    position:relative;
-    z-index:2;
-    background:rgba(255,255,255,0.9);
-    padding:36px;
-    border-radius:14px;
-    box-shadow:0 20px 50px rgba(0,0,0,.18);
-    text-align:center;
-    max-width:520px;
-  }
-  #congrats-card h2{color:#004aad;margin-bottom:10px}
-  #congrats-card a.contact-btn{display:inline-flex;justify-content:center;margin:15px auto 0 auto;width:180px}
+/* Congrats overlay */
+#congrats{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9998;overflow:hidden}
+#congrats video#confete-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;pointer-events:none;}
+#congrats-card{
+  position:relative;
+  z-index:2;
+  background:rgba(255,255,255,0.9);
+  padding:36px;
+  border-radius:14px;
+  box-shadow:0 20px 50px rgba(0,0,0,.18);
+  text-align:center;
+  max-width:520px;
+}
+#congrats-card h2{color:#004aad;margin-bottom:10px}
+#congrats-card a.contact-btn{display:inline-flex;justify-content:center;margin:15px auto 0 auto;width:180px}
 
-  @media (max-width:1024px){
-    #app{flex-direction:column}
-    #tutor{flex:0 0 auto;width:100%;padding:20px}
-    #tutor #logo-tutor{width:280px}
-    #tutor img.tutor-photo{width:160px;height:160px}
-  }
-  @media (max-width:640px){
-    #splash img{width:300px}
-    #tutor #logo-tutor{width:220px}
-    #tutor img.tutor-photo{width:140px;height:140px}
-    .contact-btn{width:140px}
-    #app{padding:18px}
-    #form-container{padding:20px}
-    #dropdown-display{padding:10px}
-    #dropdown-options{border-radius:10px}
-    #congrats-card{padding:22px;margin:12px}
-  }
+/* Responsive */
+@media (max-width:1024px){
+  #app{flex-direction:column}
+  #tutor{flex:0 0 auto;width:100%;padding:20px}
+  #tutor #logo-tutor{width:280px}
+  #tutor img.tutor-photo{width:160px;height:160px}
+}
+@media (max-width:640px){
+  #splash img{width:300px}
+  #tutor #logo-tutor{width:220px}
+  #tutor img.tutor-photo{width:140px;height:140px}
+  .contact-btn{width:140px}
+  #app{padding:18px}
+  #form-container{padding:20px}
+  #dropdown-display{padding:10px}
+  #dropdown-options{border-radius:10px}
+  #congrats-card{padding:22px;margin:12px}
+}
 </style>
 </head>
 <body>
@@ -188,7 +189,7 @@ window.addEventListener("load",()=>{
   },1200);
 });
 
-/* Áreas e cursos */
+/* Dropdown de áreas e cursos */
 const areas = {
   "Educação": { "Graduação": ["Pedagogia","Licenciatura em Matemática"], "Pós": ["Gestão Educacional"] },
   "Artes e Design": { "Graduação": ["Design Gráfico","Artes Visuais"], "Pós": ["Design de Interiores"] },
@@ -327,6 +328,10 @@ function showCongrats(nomeCompleto){
   titulo.textContent=`Parabéns ${primeiro} ${segundo}!`;
   const congrats=document.getElementById("congrats");
   congrats.style.display="flex";
+
+  const confeteVideo=document.getElementById("confete-video");
+  confeteVideo.currentTime=0;
+  confeteVideo.play().catch(()=>{});
 
   const instaBtn=document.getElementById("insta-btn");
   if(redirectTimer) clearTimeout(redirectTimer);
