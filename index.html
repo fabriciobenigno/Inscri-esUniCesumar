@@ -657,37 +657,61 @@ function setButtonLoading(on){
 async function handleSubmit(e){
   e.preventDefault();
   if(submitting) return;
-  const nome=document.getElementById("nome").value.trim();
-  const telefone=document.getElementById("telefone").value.trim();
-  const cpf=document.getElementById("cpf").value.trim();
-  const email=document.getElementById("email").value.trim();
-  const nascimento=document.getElementById("nascimento").value;
-  const endereco=document.getElementById("endereco").value.trim();
-  const cep=document.getElementById("cep").value.trim();
-  const areaInteresse=display.textContent.trim();
 
+  // Coleta dos dados do formulário
+  const nome = document.getElementById("nome").value.trim();
+  const telefone = document.getElementById("telefone").value.trim();
+  const cpf = document.getElementById("cpf").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const nascimento = document.getElementById("nascimento").value;
+  const endereco = document.getElementById("endereco").value.trim();
+  const cep = document.getElementById("cep").value.trim();
+  const areaInteresse = display.textContent.trim();
+
+  // Validação básica
   if(!nome || !telefone || !cpf || !email || !nascimento || !endereco || !cep){
     alert("Preencha todos os campos.");
     return;
   }
-  if(!areaInteresse || areaInteresse==="Área de interesse"){
+  if(!areaInteresse || areaInteresse === "Área de interesse"){
     alert("Selecione a Área de Interesse.");
     return;
   }
 
-  const payload={nome,telefone,cpf,email,nascimento,endereco,cep,areaInteresse};
-  submitting=true;
+  const payload = { nome, telefone, cpf, email, nascimento, endereco, cep, areaInteresse };
+
+  submitting = true;
   setButtonLoading(true);
-  try{
-    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
+
+  try {
+    // Envia os dados para o Apps Script
+    await fetch(WEB_APP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    // Reseta o formulário
     document.getElementById("form-inscricao").reset();
-    display.textContent="Área de interesse";
+    display.textContent = "Área de interesse";
+
+    // Mostra a tela de parabéns
     showCongrats(nome);
-  } catch(err){ console.error(err); alert("Erro ao enviar."); }
-  setTimeout(()=>{ submitting=false; setButtonLoading(false); },700);
+
+  } catch(err) {
+    console.error("Erro ao enviar formulário:", err);
+    alert("Erro ao enviar. Tente novamente.");
+  }
+
+  setTimeout(() => {
+    submitting = false;
+    setButtonLoading(false);
+  }, 700);
 }
 
-window.handleSubmit=handleSubmit;
+// Garante que a função esteja acessível globalmente
+window.handleSubmit = handleSubmit;
+
 
 function showCongrats(nomeCompleto){
   const [primeiro,...resto]=nomeCompleto.split(" ");
@@ -708,6 +732,7 @@ function showCongrats(nomeCompleto){
 </script>
 </body>
 </html>
+
 
 
 
