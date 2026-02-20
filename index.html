@@ -15,701 +15,142 @@ body{
   background:linear-gradient(135deg,#004aad,#007bff);
   display:flex;justify-content:center;align-items:center;
   padding:20px;overflow:auto;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
   scroll-behavior:smooth;
   padding-top: env(safe-area-inset-top);
 }
 
 /* Splash */
 #splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
-#splash img{width:350px;margin-bottom:20px;animation:fadeInDown 1.2s}
-#splash p{color:#004aad;font-size:1.25rem;font-weight:500;animation:fadeIn 1.2s}
-@keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+#splash img{width:350px;margin-bottom:20px}
+#splash p{color:#004aad;font-size:1.25rem;font-weight:500}
 
-/* App card */
-#app{display:flex;flex-direction:row;background:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1000px;width:100%;overflow:hidden;opacity:0;transform:scale(.98);transition:opacity .5s,transform .5s}
+/* App */
+#app{display:flex;flex-direction:row;background:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1000px;width:100%;overflow:hidden;opacity:0;transform:scale(.98);transition:.5s}
 
-/* Tutor (left column) */
-#tutor{flex:0 0 380px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;background:#f6f9ff}
-#tutor #logo-tutor{width:330px;margin-bottom:14px;object-fit:contain}
+/* Tutor */
+#tutor{flex:0 0 380px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;background:#f6f9ff}
+#tutor #logo-tutor{width:330px;margin-bottom:14px}
 #tutor img.tutor-photo{width:200px;height:200px;border-radius:50%;margin-bottom:14px;object-fit:cover}
-.tutor-name{color:#004aad;font-size:1.45rem;font-weight:700;text-align:center;margin-bottom:6px}
+.tutor-name{color:#004aad;font-size:1.45rem;font-weight:700;text-align:center}
 .tutor-role{color:#333;font-size:1rem;text-align:center;margin-bottom:16px}
 
-/* Contact buttons */
-.contact-list{display:flex;flex-direction:column;gap:10px;margin-top:6px}
-.contact-btn{display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;border-radius:8px;padding:10px 14px;color:#004aad;text-decoration:none;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.06);width:160px;transition:transform .18s,background .18s,color .18s}
-.contact-btn img{width:32px;height:32px;display:block}
+/* Contact */
+.contact-list{display:flex;flex-direction:column;gap:10px}
+.contact-btn{display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;border-radius:8px;padding:10px 14px;color:#004aad;text-decoration:none;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.06);width:160px;transition:.2s}
+.contact-btn img{width:32px;height:32px}
 .contact-btn:hover{transform:translateY(-4px);background:#007bff;color:#fff}
 .contact-btn:hover img{filter:brightness(0) invert(1)}
 
-/* Form container (right) */
+/* Form */
 #form-container{flex:1;padding:28px 30px;display:flex;flex-direction:column;justify-content:center}
 #form-container h1{color:#004aad;font-size:1.9rem;margin-bottom:12px}
 form{display:flex;flex-direction:column;gap:10px}
-input[type="text"],input[type="tel"],input[type="email"],input[type="date"]{
-  width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem;background:#fff
+input{
+  width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem
 }
-input::placeholder{color:#999}
 input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,255,0.08)}
-.small-note{font-size:.9rem;color:#666;margin-top:4px}
 
-/* Dropdown custom */
-#dropdown-interesse{position:relative}
-#dropdown-display{display:block;padding:12px;border-radius:8px;border:1px solid #d0d6e0;background:#fff;cursor:pointer}
-#dropdown-options{
-  position:absolute;left:0;right:0;background:#fff;border:1px solid #d0d6e0;border-radius:8px;margin-top:6px;overflow:auto;display:none;z-index:50;box-shadow:0 6px 18px rgba(0,0,0,0.12);
-  -webkit-overflow-scrolling:touch;
-}
-#dropdown-options div{padding:10px;cursor:pointer}
-#dropdown-options div:hover{background:#f2f6ff}
-.categoria-title{font-weight:700;padding:10px;background:#f6f9ff;margin-top:6px;border-radius:6px}
+.btn{background:#007bff;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:700;cursor:pointer}
+.btn:hover{background:#0056b3}
 
-/* Submit */
-.btn{background:#007bff;color:#fff;border:none;padding:12px 18px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:transform .12s}
-.btn:hover{transform:scale(1.02);background:#0056b3}
-.btn[disabled]{opacity:.7;cursor:not-allowed}
-.btn.loading::after { content: ''; display: inline-block; width: 1em; text-align: left; margin-left: 6px; animation: dots 1s steps(5,end) infinite; }
-@keyframes dots{0%,20%{content:''}40%{content:'.'}60%{content:'..'}80%,100%{content:'...'}}
-
-/* Congrats overlay */
-#congrats{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9998;overflow:hidden}
-#congrats video#confete-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:1;pointer-events:none;}
-#congrats-card{
-  position:relative;
-  z-index:2;
-  background:rgba(255,255,255,0.9);
-  padding:36px;
-  border-radius:14px;
-  box-shadow:0 20px 50px rgba(0,0,0,.18);
-  text-align:center;
-  max-width:520px;
-}
+/* Congrats */
+#congrats{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9998}
+#congrats video{position:absolute;width:100%;height:100%;object-fit:cover}
+#congrats-card{position:relative;background:rgba(255,255,255,0.9);padding:36px;border-radius:14px;text-align:center;max-width:520px}
 #congrats-card h2{color:#004aad;margin-bottom:10px}
-#congrats-card a.contact-btn{display:inline-flex;justify-content:center;margin:15px auto 0 auto;width:180px}
 
-/* Responsive */
 @media (max-width:1024px){
   #app{flex-direction:column}
-  #tutor{flex:0 0 auto;width:100%;padding:20px}
-  #tutor #logo-tutor{width:280px}
-  #tutor img.tutor-photo{width:160px;height:160px}
-}
-@media (max-width:640px){
-  #splash img{width:300px}
-  #tutor #logo-tutor{width:220px}
-  #tutor img.tutor-photo{width:140px;height:140px}
-  .contact-btn{width:140px}
-  #app{padding:18px}
-  #form-container{padding:20px}
-  #dropdown-display{padding:10px}
-  #dropdown-options{border-radius:10px}
-  #congrats-card{padding:22px;margin:12px}
-  
-  /* Espaço extra só para celular */
-  #tutor {padding-top:500px;}
 }
 </style>
 </head>
 <body>
 
 <div id="splash">
-  <img src="tata.png" alt="Logo">
+  <img src="tata.png">
   <p>Carregando...</p>
 </div>
 
-<div id="app" role="main" aria-labelledby="page-title" style="display:none">
+<div id="app" style="display:none">
 
-<aside id="tutor" aria-label="Informações do tutor">
-  <img id="logo-tutor" src="tata.png" alt="Logo">
-  <img class="tutor-photo" src="fabricio-benigno.jpg" alt="Foto do tutor Fabricio Benigno">
+<aside id="tutor">
+  <img id="logo-tutor" src="tata.png">
+  <img class="tutor-photo" src="fabricio-benigno.jpg">
   <div class="tutor-name">Fabricio Benigno</div>
   <div class="tutor-role">Tutor e Orientador</div>
 
   <div class="contact-list">
-    <a class="contact-btn" href="https://wa.me/5585921695620" target="_blank" rel="noopener noreferrer">
-      <img src="whatsapp.ico" alt="WhatsApp"> WhatsApp
+    <a class="contact-btn" href="https://wa.me/5585921695620" target="_blank">
+      <img src="whatsapp.ico"> WhatsApp
     </a>
-    <a class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
-      <img src="instagram.ico" alt="Instagram"> Instagram
+    <a class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank">
+      <img src="instagram.ico"> Instagram
     </a>
   </div>
 </aside>
 
-<section id="form-container" aria-labelledby="page-title">
-  <h1 id="page-title">Cadastro de Inscrição</h1>
-  <form id="form-inscricao" onsubmit="handleSubmit(event)" autocomplete="off" novalidate>
-    <input id="nome" type="text" placeholder="Nome Completo" required />
-    <input id="telefone" type="tel" placeholder="Número" required />
-    <input id="cpf" type="text" placeholder="CPF" required />
-    <input id="email" type="email" placeholder="Email" required />
-    <input id="nascimento" type="date" placeholder="Data de Nascimento" required />
-    <input id="endereco" type="text" placeholder="Endereço" required />
-    <input id="cep" type="text" placeholder="CEP" required />
-
-    <div id="dropdown-interesse" aria-haspopup="listbox">
-      <div id="dropdown-display" aria-expanded="false" tabindex="0">Área de interesse</div>
-      <div id="dropdown-options" role="listbox" aria-label="Áreas de interesse"></div>
-    </div>
-
-    <div class="small-note">Selecione a área antes de enviar.</div>
+<section id="form-container">
+  <h1>Cadastro de Inscrição</h1>
+  <form onsubmit="handleSubmit(event)">
+    <input id="nome" type="text" placeholder="Nome Completo" required>
+    <input id="telefone" type="tel" placeholder="Número" required>
+    <input id="cpf" type="text" placeholder="CPF" required>
+    <input id="email" type="email" placeholder="Email" required>
+    <input id="nascimento" type="text" placeholder="Data de Nascimento (dd/mm/aaaa)" required>
+    <input id="endereco" type="text" placeholder="Endereço" required>
+    <input id="cep" type="text" placeholder="CEP" required>
+    <input id="curso" type="text" placeholder="Curso de Interesse" required>
     <button type="submit" class="btn">Enviar Inscrição</button>
   </form>
 </section>
 </div>
 
-<div id="congrats" role="dialog" aria-modal="true">
-  <video autoplay muted loop playsinline id="confete-video">
+<div id="congrats">
+  <video autoplay muted loop>
     <source src="confetes.mp4" type="video/mp4">
   </video>
-  <div id="congrats-card" role="document" aria-labelledby="congrats-title">
-    <img src="festa.ico" alt="" style="width:40px;height:40px;margin-bottom:5px;">
-    <img src="festa.ico" alt="" style="width:40px;height:40px;margin-bottom:10px;">
+  <div id="congrats-card">
     <h2 id="congrats-title"></h2>
     <p>Estarei aqui para te auxiliar em sua jornada acadêmica.</p>
-    <a id="insta-btn" class="contact-btn" href="https://instagram.com/fabricio_benigno" target="_blank" rel="noopener noreferrer">
-      <img src="instagram.ico" alt="Instagram" style="width:24px;height:24px;"> Instagram
-    </a>
   </div>
 </div>
 
 <script>
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwPPOOxKjI2z_DHiN2RfqaKp9fh6Z_rw-GUN3IFVt8wapzeWuNYY8t2gT7OEmFrK9Im/exec";
-const AUTO_REDIRECT_MS = 30000;
+const WEB_APP_URL="https://script.google.com/macros/s/AKfycbwSppBi7nRh82pEgw8ncmhx9noIly0tQFC1wNYVJuBCyv2gpu05nr7QKQqt5hfF-7sD/exec";
 
 window.addEventListener("load",()=>{
   setTimeout(()=>{
-    const splash=document.getElementById("splash");
-    splash.style.opacity=0;
-    setTimeout(()=>{
-      splash.style.display="none";
-      const app=document.getElementById("app");
-      app.style.display="flex";
-      requestAnimationFrame(()=>{ app.style.opacity=1; app.style.transform="scale(1)"; });
-    },500);
+    document.getElementById("splash").style.display="none";
+    const app=document.getElementById("app");
+    app.style.display="flex";
+    app.style.opacity=1;
   },1200);
 });
 
-/* Dropdown de áreas e cursos */
-const areas = {
-  "AGRÁRIAS E MEIO AMBIENTE": {
-    "Graduação": [
-      "Agronomia SEMI",
-      "Agrotecnologia SEMI",
-      "Gestão Ambiental SEMI",
-      "Gestão do Agronegócio"
-    ],
-    "Pós": []
-  },
-  "ALIMENTOS E BEBIDAS": {
-    "Graduação": [
-      "Gastronomia",
-      "Tecnologia em Alimentos SEMI"
-    ],
-    "Pós": []
-  },
-  "ARTES E DESIGN": {
-    "Graduação": [
-      "Cinema e Audiovisual",
-      "Design de Animação",
-      "Design de Interiores",
-      "Design de Moda",
-      "Design de Produto",
-      "Design Gráfico",
-      "Design Musical",
-      "Licenciatura em Artes Visuais SEMI",
-      "Licenciatura em Dança SEMI",
-      "Licenciatura em Música SEMI",
-      "Licenciatura em Teatro SEMI"
-    ],
-    "Pós": []
-  },
-  "COMUNICAÇÃO": {
-    "Graduação": [
-      "Ciência da Criatividade",
-      "Fotografia",
-      "Jornalismo",
-      "Publicidade e Propaganda",
-      "Relações Públicas"
-    ],
-    "Pós": []
-  },
-  "EDUCAÇÃO": {
-    "Graduação": [
-      "Acompanhamento do Transtorno do Espectro Autista SEMI",
-      "Licenciatura em Ciências Biológicas SEMI",
-      "Licenciatura em Educação Especial SEMI",
-      "Licenciatura em Educação Fisica SEMI",
-      "Licenciatura em Filosofia SEMI",
-      "Licenciatura em Fisica SEMI",
-      "Licenciatura em Geografia SEMI",
-      "Licenciatura em História SEMI",
-      "Licenciatura em Letras Português-Inglês SEMI",
-      "Licenciatura em Letras-Libras SEMI",
-      "Licenciatura em Matemática SEMI",
-      "Licenciatura em Pedagogia SEMI",
-      "Licenciatura em Química SEMI",
-      "Licenciatura em Sociologia SEMI",
-      "Psicopedagogia SEMI",
-      "Segunda Habilitação em Letras Português-Inglês SEMI",
-      "Segunda Licenciatura em Filosofia SEMI",
-      "Segunda Licenciatura em Geografia SEMI",
-      "Segunda Licenciatura em História SEMI",
-      "Segunda Licenciatura em Matemática SEMI",
-      "Segunda Licenciatura em Pedagogia SEMI",
-      "Segunda Licenciatura em Sociologia SEMI",
-      "Teologia"
-    ],
-    "Pós": [
-      "Alfabetização e Letramento",
-      "Coordenação Pedagógica",
-      "Educação Financeira e o Ensino da Matemática",
-      "Psicopedagogia",
-      "Psicopedagogia Clinica e Institucional",
-      "Educação Executiva e Análise Organizacional",
-      "Pedagogia não Formal: Novos Espaços para a Atuação do Pedagogo",
-      "Ambiente Escolar e Familiar",
-      "Arte, Cultura e Educação",
-      "Atendimento Educacional Especializado - Educação Especial e Inclusiva",
-      "Didática Inovadora na Educação Básica",
-      "Docência Aplicada a Questões Socioeducativas",
-      "Docência no Ensino Superior",
-      "EAD e as Novas Tecnologias Educacionais",
-      "Educação de Jovens e Adultos e Ludopedagogia",
-      "Educação do Campo",
-      "Educação Fisica Escolar",
-      "Educação Infantil e Anos Iniciais do Ensino Fundamental",
-      "Ensino de História e Geografia e suas Linguagens",
-      "Gestão da Aprendizagem e Educação Cognitiva",
-      "Gestão do Conhecimento na Educação",
-      "Gestão Educacional",
-      "História, Cultura e Literatura AfroBrasileira e Indígena",
-      "Inovações no Ensino de Matemática",
-      "Leitura e Produção Textual",
-      "Lingua Portuguesa e Literatura no Contexto Educacional",
-      "Ludicidade no Currículo Escolar",
-      "Metodologias e Processos em EAD",
-      "Neuroaprendizagem",
-      "Pedagogia e Novo Cenário da Home Education",
-      "Pedagogia Empresarial e Desenvolvimento do Conhecimento",
-      "Políticas e Educação Democrática",
-      "Práticas Inovadoras em Educação",
-      "Teatro, Expressividade e Dinamismo no Ambiente Escolar",
-      "Neuropsicopedagogia Novo",
-      "Educação Especial Inclusiva Novo",
-      "Administração Escolar, Supervisão e Orientação Novo",
-      "Educação Especial Transtorno do Espectro Autista Novo",
-      "Psicologia Educacional Novo",
-      "Gestão Escolar",
-      "Gamificação na Educação Novo",
-      "Orientação Educacional Novo"
-    ]
-  },
-  "ENGENHARIAS E ARQUITETURA": {
-    "Graduação": [
-      "Arquitetura e Urbanismo SEMI",
-      "Automação Industria SEMI",
-      "Automação Residencial e Predial",
-      "Energias Renováveis SEMI",
-      "Engenharia Ambiental e Sanitária SEMI",
-      "Engenharia Civil SEMI",
-      "Engenharia de Produção SEMI",
-      "Engenharia Elétrica SEMI",
-      "Engenharia Mecânica SEMI",
-      "Engenharia Mecatrônica SEMI",
-      "Gestão da Produção Industrial",
-      "Manutenção Industrial SEMI",
-      "Segurança do Trabalho"
-    ],
-    "Pós": []
-  },
-  "GESTÃO E NEGÓCIOS": {
-    "Graduação": [
-      "Administração",
-      "Ciências Contábeis",
-      "Ciências Econômicas",
-      "Comércio Exterior",
-      "Empreendedorismo",
-      "Gestão Comercial",
-      "Gestão da Qualidade",
-      "Gestão da Saúde Pública",
-      "Gestão de Cooperativas",
-      "Gestão de E-Commerce",
-      "Gestão de Farmácia",
-      "Gestão de Investimentos e Mercado Financeiro",
-      "Gestão de Negócios Imobiliários",
-      "Gestão de Recursos Humanos",
-      "Gestão de Turismo",
-      "Gestão Financeira",
-      "Gestão Pública",
-      "Inteligência Artificial e Machine Learning",
-      "Logistica",
-      "Marketing",
-      "Mídias Sociais Digitais",
-      "Negócios e Customer Experience",
-      "Processos Gerenciais",
-      "Secretariado"
-    ],
-    "Pós": [
-      "Gestão de Projetos",
-      "Gestão Estratégica de Esportes",
-      "Gestão Comercial e Inteligência de Mercado",
-      "Gestão de Cooperativas de Crédito",
-      "Gestão de Pessoas: Treinamento e Desenvolvimento",
-      "Liderança e Gestão de Equipes",
-      "Agronegócio",
-      "Coaching aplicado à Gestão de Pessoas",
-      "Coaching com Enfase em Mentoring para Gestão de Pessoas",
-      "Gestão da Comunicação Organizacional",
-      "Gestão de Negócios e Inovação",
-      "Gestão de Projetos e Negócios Sociais",
-      "Gestão do Conhecimento nas Organizações",
-      "Planejamento e Estratégia Organizacional",
-      "Supply Chain Management: Gerenciamento da Cadeia de Suprimentos",
-      "Administração Financeira",
-      "Administração Pública",
-      "Auditoria, Contabilidade e Pericia Contábil",
-      "Comunicação Empresarial e Marketing Digital",
-      "Desenvolvimento Profissional",
-      "Design Thinking e Criatividade nas Organizações",
-      "Empreendimentos e Negócios Imobiliários",
-      "Engenharia e Gestão da Produção",
-      "Gastronomia Funcional e Natural",
-      "Gestão da Qualidade",
-      "Gestão de Custos e Planejamento Estratégico",
-      "Gestão de Pessoas na Administração Pública",
-      "Gestão do Comportamento e da Interatividade em Organizações",
-      "Gestão e Planejamento",
-      "Gestão Estratégica de Negócios",
-      "Gestão Estratégica de Pessoas",
-      "Gestão Estratégica do Varejo",
-      "Gestão Estratégica em Negócios Gastronômicos",
-      "Governança Corporativa e Gestão Estratégica",
-      "Inovação e Empreendedorismo Social",
-      "Liderança Inovadora",
-      "Logistica",
-      "Marketing",
-      "Marketing Digital",
-      "Marketing e Mídias Digitais",
-      "Mercado Financeiro e Banking",
-      "Moda e Negócio",
-      "Negócios Ágeis",
-      "Negócios Digitais e Inovação",
-      "Planejamento e Gestão de Trânsito",
-      "Planejamento e Organização de Eventos",
-      "Projeto de Interiores",
-      "Sistema Financeiro e Mercado de Capitais",
-      "Administração de Pessoas Novo",
-      "Recursos Humanos NOVO",
-      "Psicologia Positiva e Coaching"
-    ]
-  },
-  "JURÍDICO E SEGURANÇA": {
-    "Graduação": [
-      "Criminologia",
-      "Gestão de Segurança Privada",
-      "Gestão de Serviços Judiciais e Notariais",
-      "Investigação Forense e Perícia Criminal",
-      "Segurança Pública",
-      "Serviço Social SEM"
-    ],
-    "Pós": [
-      "Ciência Política",
-      "Direito Imobiliário",
-      "Direitos Humanos e Realidades Regionais",
-      "Educação Social e Cidadania",
-      "Estudos Bíblicos no Antigo Testamento",
-      "Estudos Bíblicos no Novo Testamento",
-      "Fashion Law - Direito da Moda",
-      "Gestão do Sistema Único da Assistência Social",
-      "Governança Corporativa e Responsabilidade Social",
-      "Meio Ambiente e Sustentabilidade",
-      "Políticas Públicas e Municipalidade",
-      "Direito Civil Novo",
-      "Direito Penal Novo",
-      "Direito Trabalhista Novo"
-    ]
-  },
-  "SAÚDE ANIMAL": {
-    "Graduação": ["Bem-Estar Animal SEMI"],
-    "Pós": []
-  },
-  "SAÚDE E BEM-ESTAR": {
-    "Graduação": [
-      "Biomedicina SEMI",
-      "Ciência da Felicidade SEMI",
-      "Educação Fisica SEMI",
-      "Estética e Cosmética SEMI",
-      "Farmácia SEMI",
-      "Fisioterapia SEMI",
-      "Fonoaudiologia SEMI Gava",
-      "Gerontologia SEMI",
-      "Gestão Hospitalar",
-      "Nutrição SEMI",
-      "Podologia SEMI",
-      "Radiologia SEMI",
-      "Terapia Ocupacional SEMI",
-      "Terapias Integrativas e Complementares SEMI"
-    ],
-    "Pós": [
-      "Acupuntura e Técnicas Complementares NOVO",
-      "Análises Clinicas NOVO",
-      "Auditoria e Governança Clínica em Saúde NOVO",
-      "Auditoria em Saúde NOVO",
-      "Cuidados Paliativos e Tanatologia NOVO",
-      "Enfermagem do Trabalho",
-      "Enfermagem em Cardiologia e Hemodinâmica NOVO",
-      "Enfermagem em Cuidados Intensivos Neonatais e Pediátricos NOVO",
-      "Enfermagem em Estomaterapia NOVO",
-      "Enfermagem em Nefrologia NOVO",
-      "Enfermagem em Pediatria e Neonatologia NOVO",
-      "Enfermagem em Unidade de Terapia Intensiva NOVO",
-      "Enfermagem em Urgência e Emergência NOVO",
-      "Estética e Cosmética: Mercado e Procedimentos",
-      "Ética e Regulação na Saúde Digital NOVO",
-      "Farmácia Hospitalar e Clínica NOVO",
-      "Farmacologia Aplicada à Clínica e Prescrição Farmacêutica NOVO",
-      "Fisiologia do Exercício",
-      "Fisioterapia Cardiorrespiratória NOVO",
-      "Fisioterapia em Gerontologia e Reabilitação do Idoso NOVO",
-      "Fisioterapia em Reabilitação Neurológica NOVO",
-      "Fisioterapia em Terapia Intensiva NOVO",
-      "Fisioterapia Pélvica Funcional NOVO",
-      "Fisioterapia Traumato-Ortopédica Funcional NOVO",
-      "Fonoaudiologia com Ênfase em Audiologia e Reabilitação Auditiva NOVO",
-      "Fonoaudiologia Hospitalar e Reabilitação NOVO",
-      "Gestão da Qualidade e Segurança do Paciente",
-      "Gestão da Qualidade em Saúde",
-      "Gestão Estratégica de Organizações da Saúde",
-      "Gestão Hospitalar",
-      "Hematologia Clínica NOVO",
-      "Higiene e Inspeção de Alimentos NOVO",
-      "Higiene Ocupacional",
-      "Inteligência Artificial Aplicada à Saúde NOVO",
-      "Neurociências Aplicadas à Saúde e Bem-Estar NOVO",
-      "Nutrição Clínica NOVO",
-      "Nutrição e Alta Performance Esportiva",
-      "Nutrição Estética Funcional e Marketing Estratégico NOVO",
-      "Nutrição Funcional",
-      "Nutrição Materno-Infantil NOVO",
-      "Personal Training",
-      "Podologia Clínica NOVO",
-      "Práticas Integrativas e Complementares (PICs) NOVO",
-      "Psicologia Clínica NOVO",
-      "Saúde Coletiva NOVO",
-      "Saúde do Idoso e Gerontologia NOVO",
-      "Saúde Mental e Atenção Psicossocial NOVO",
-      "Saúde Mental na Infância e Adolescência NOVO",
-      "Saúde Multidisciplinar em Oncologia NOVO",
-      "Saúde Pública",
-      "Telemedicina e Saúde Digital NOVO",
-      "Terapia Cognitivo-Comportamental NOVO",
-      "Vigilância Sanitária NOVO"
-    ]
-  },
-  "MEIO AMBIENTE": {
-    "Graduação": [
-      "Biotecnologia Ambiental",
-      "Educação Ambiental e Sustentabilidade",
-      "Perícia e Auditoria Ambiental",
-      "Gestão Ambiental"
-    ],
-    "Pós": [
-      "Enfermagem do Trabalho",
-      "Fisiologia do Exercício",
-      "Saúde Pública",
-      "Biotecnologia Ambiental",
-      "Educação Ambiental e Sustentabilidade",
-      "Estética e Cosmética: Mercado e Procedimentos",
-      "Gestão Ambiental",
-      "Gestão da Qualidade em Saúde",
-      "Gestão Estratégica de Organizações da Saúde",
-      "Higiene Ocupacional",
-      "Nutrição e Alta Performance Esportiva",
-      "Nutrição Funcional",
-      "Perícia e Auditoria Ambiental",
-      "Personal Training",
-      "Gestão Hospitalar Novo"
-    ]
-  },
-  "TECNOLOGIA E INOVAÇÃO": {
-    "Graduação": [
-      "Big Data e Análise de Dados Organizacionais",
-      "Ciência de Dados",
-      "Construção de Narrativas e Copywriting NOVO",
-      "Desenvolvimento de Sistemas com JAVA",
-      "Desenvolvimento de Sistemas com Python",
-      "Design de UX",
-      "Engenharia de Segurança do Trabalho",
-      "Gestão de Tecnologia da Informação Corporativa",
-      "Inclusão e Acessibilidade na Era Digital NOVO",
-      "Inovação e Gestão de Conteúdo para a Economia Criativa",
-      "Inovação e Negócios Disruptivos",
-      "Inteligência Artificial Aplicada a Growth Marketing NOVO",
-      "MBA em Economia Criativa, Cultura e Inovação",
-      "MBA em Inovação e Criatividade no Ambiente Empresarial",
-      "MBA em Marketing, Criatividade e Inovação",
-      "Prática de Metodologias Ágeis",
-      "Qualidade e Teste de Software NOVO",
-      "Tecnologia e Cultura Digital Aplicadas à Educação"
-    ],
-    "Pós": [
-      "Ciência de Dados",
-      "Inovação e Criatividade no Ambiente Empresarial",
-      "Marketing, Criatividade e Inovação",
-      "Executivo em Economia Criativa, Cultura e Inovação",
-      "Desenvolvimento de Sistemas com JAVA",
-      "Desenvolvimento de Sistemas com Python",
-      "Design de UX",
-      "Engenharia de Segurança do Trabalho",
-      "Inovação e Gestão de Conteúdo para a Economia Criativa",
-      "Inovação e Negócios Disruptivos",
-      "Prática de Metodologias Ágeis"
-    ]
-  }
-};
-
-
-const dropdown=document.getElementById("dropdown-interesse");
-const display=document.getElementById("dropdown-display");
-const optionsContainer=document.getElementById("dropdown-options");
-let step="area";
-let selectedArea="";
-let submitting=false;
-let redirectTimer=null;
-
-function renderOptions(){
-  optionsContainer.innerHTML="";
-  if(step==="area"){
-    Object.keys(areas).forEach(area=>{
-      const div=document.createElement("div");
-      div.textContent=area;
-      div.setAttribute("role","option");
-      div.addEventListener("click",e=>{
-        e.stopPropagation();
-        selectedArea=area;
-        step="curso";
-        renderOptions();
-      });
-      optionsContainer.appendChild(div);
-    });
-  } else if(step==="curso"){
-    const cursos=areas[selectedArea]||{};
-    Object.keys(cursos).forEach(cat=>{
-      if(cursos[cat] && cursos[cat].length>0){
-        const catDiv=document.createElement("div");
-        catDiv.textContent=cat;
-        catDiv.className="categoria-title";
-        optionsContainer.appendChild(catDiv);
-        cursos[cat].forEach(curso=>{
-          const div=document.createElement("div");
-          div.textContent=curso;
-          div.setAttribute("role","option");
-          div.addEventListener("click",e=>{
-            e.stopPropagation();
-            display.textContent=curso;
-            closeOptions();
-            step="area";
-            selectedArea="";
-          });
-          optionsContainer.appendChild(div);
-        });
-      }
-    });
-  }
-  const rect=dropdown.getBoundingClientRect();
-  const maxHeight=Math.max(rect.top-10,120);
-  optionsContainer.style.bottom=rect.height+"px";
-  optionsContainer.style.top="auto";
-  optionsContainer.style.maxHeight=maxHeight+"px";
-  optionsContainer.style.overflowY="auto";
-  optionsContainer.style.display="block";
-  display.setAttribute("aria-expanded","true");
-}
-
-function openOptions(){ renderOptions(); }
-function closeOptions(){ optionsContainer.style.display="none"; display.setAttribute("aria-expanded","false"); }
-
-display.addEventListener("click",e=>{
-  e.stopPropagation();
-  step="area";
-  selectedArea="";
-  optionsContainer.style.display==="block"?closeOptions():openOptions();
-});
-document.addEventListener("click",()=>{ closeOptions(); });
-
-function setButtonLoading(on){
-  const btn=document.querySelector(".btn");
-  if(!btn) return;
-  if(on){
-    btn.disabled=true;
-    btn.textContent="Enviando";
-    btn.classList.add("loading");
-  } else {
-    btn.disabled=false;
-    btn.textContent="Enviar Inscrição";
-    btn.classList.remove("loading");
-  }
-}
-
 async function handleSubmit(e){
   e.preventDefault();
-  if(submitting) return;
-  const nome=document.getElementById("nome").value.trim();
-  const telefone=document.getElementById("telefone").value.trim();
-  const cpf=document.getElementById("cpf").value.trim();
-  const email=document.getElementById("email").value.trim();
-  const nascimento=document.getElementById("nascimento").value;
-  const endereco=document.getElementById("endereco").value.trim();
-  const cep=document.getElementById("cep").value.trim();
-  const areaInteresse=display.textContent.trim();
+  const payload={
+    nome:nome.value,
+    telefone:telefone.value,
+    cpf:cpf.value,
+    email:email.value,
+    nascimento:nascimento.value,
+    endereco:endereco.value,
+    cep:cep.value,
+    areaInteresse:curso.value
+  };
 
-  if(!nome || !telefone || !cpf || !email || !nascimento || !endereco || !cep){
-    alert("Preencha todos os campos.");
-    return;
-  }
-  if(!areaInteresse || areaInteresse==="Área de interesse"){
-    alert("Selecione a Área de Interesse.");
-    return;
-  }
-
-  const payload={nome,telefone,cpf,email,nascimento,endereco,cep,areaInteresse};
-  submitting=true;
-  setButtonLoading(true);
-  try{
-    await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
-    document.getElementById("form-inscricao").reset();
-    display.textContent="Área de interesse";
-    showCongrats(nome);
-  } catch(err){ console.error(err); alert("Erro ao enviar."); }
-  setTimeout(()=>{ submitting=false; setButtonLoading(false); },700);
+  await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
+  document.querySelector("form").reset();
+  showCongrats(payload.nome);
 }
-
-window.handleSubmit=handleSubmit;
 
 function showCongrats(nomeCompleto){
-  const [primeiro,...resto]=nomeCompleto.split(" ");
-  const segundo=resto.length>0?resto[0]:"";
-  const titulo=document.getElementById("congrats-title");
-  titulo.textContent=`Parabéns ${primeiro} ${segundo}!`;
-  const congrats=document.getElementById("congrats");
-  congrats.style.display="flex";
-
-  const confeteVideo=document.getElementById("confete-video");
-  confeteVideo.currentTime=0;
-  confeteVideo.play().catch(()=>{});
-
-  const instaBtn=document.getElementById("insta-btn");
-  if(redirectTimer) clearTimeout(redirectTimer);
-  redirectTimer=setTimeout(()=>{ window.location.href=instaBtn.href; },AUTO_REDIRECT_MS);
+  const [primeiro,segundo]=nomeCompleto.split(" ");
+  document.getElementById("congrats-title").textContent=`Parabéns ${primeiro} ${segundo||""}!`;
+  document.getElementById("congrats").style.display="flex";
 }
 </script>
+
 </body>
 </html>
-
-
-
-
-
