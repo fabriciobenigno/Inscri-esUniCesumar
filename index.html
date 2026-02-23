@@ -4,8 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Inscrição Curso</title>
-<link rel="icon" type="image/x-icon" href="simbolo.ico?v=1">
-<link rel="shortcut icon" href="tata.png?v=1">
+<link rel="icon" type="image/x-icon" href="simbolo.ico">
+<link rel="shortcut icon" href="tata.png">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -15,53 +15,78 @@ body{
   background:linear-gradient(135deg,#004aad,#007bff);
   display:flex;justify-content:center;align-items:center;
   padding:20px;overflow:auto;
-  scroll-behavior:smooth;
-  padding-top: env(safe-area-inset-top);
 }
-
-/* Splash */
-#splash{position:fixed;inset:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s}
-#splash img{width:350px;margin-bottom:20px}
+#splash{
+  position:fixed;inset:0;background:#fff;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  z-index:9999;transition:opacity .6s
+}
+#splash img{width:320px;margin-bottom:20px}
 #splash p{color:#004aad;font-size:1.25rem;font-weight:500}
-
-/* App */
-#app{display:flex;flex-direction:row;background:#fff;border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,.18);max-width:1000px;width:100%;overflow:hidden;opacity:0;transform:scale(.98);transition:.5s}
-
-/* Tutor */
-#tutor{flex:0 0 380px;padding:28px 22px;display:flex;flex-direction:column;align-items:center;background:#f6f9ff}
-#tutor #logo-tutor{width:330px;margin-bottom:14px}
-#tutor img.tutor-photo{width:200px;height:200px;border-radius:50%;margin-bottom:14px;object-fit:cover}
-.tutor-name{color:#004aad;font-size:1.45rem;font-weight:700;text-align:center}
+#app{
+  display:flex;background:#fff;border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  max-width:1000px;width:100%;overflow:hidden;
+  opacity:0;transform:scale(.98);transition:.5s
+}
+#tutor{
+  flex:0 0 380px;padding:28px 22px;
+  display:flex;flex-direction:column;
+  align-items:center;background:#f6f9ff
+}
+#tutor #logo-tutor{width:300px;margin-bottom:14px}
+#tutor img.tutor-photo{
+  width:200px;height:200px;border-radius:50%;
+  margin-bottom:14px;object-fit:cover
+}
+.tutor-name{color:#004aad;font-size:1.4rem;font-weight:700;text-align:center}
 .tutor-role{color:#333;font-size:1rem;text-align:center;margin-bottom:16px}
-
-/* Contact */
 .contact-list{display:flex;flex-direction:column;gap:10px}
-.contact-btn{display:flex;align-items:center;gap:10px;justify-content:center;background:#fff;border-radius:8px;padding:10px 14px;color:#004aad;text-decoration:none;font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.06);width:160px;transition:.2s}
+.contact-btn{
+  display:flex;align-items:center;gap:10px;
+  justify-content:center;background:#fff;border-radius:8px;
+  padding:10px 14px;color:#004aad;text-decoration:none;
+  font-weight:600;box-shadow:0 6px 14px rgba(0,0,0,0.06);
+  width:160px;transition:.2s
+}
 .contact-btn img{width:32px;height:32px}
-.contact-btn:hover{transform:translateY(-4px);background:#007bff;color:#fff}
+.contact-btn:hover{
+  transform:translateY(-4px);
+  background:#007bff;color:#fff
+}
 .contact-btn:hover img{filter:brightness(0) invert(1)}
-
-/* Form */
 #form-container{flex:1;padding:28px 30px;display:flex;flex-direction:column;justify-content:center}
 #form-container h1{color:#004aad;font-size:1.9rem;margin-bottom:12px}
 form{display:flex;flex-direction:column;gap:10px}
 input{
-  width:100%;padding:12px;border-radius:8px;border:1px solid #d0d6e0;font-size:1rem
+  width:100%;padding:12px;border-radius:8px;
+  border:1px solid #d0d6e0;font-size:1rem
 }
-input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,255,0.08)}
-
-.btn{background:#007bff;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:700;cursor:pointer}
+input:focus{
+  outline:none;border-color:#007bff;
+  box-shadow:0 4px 14px rgba(0,123,255,0.08)
+}
+.btn{
+  background:#007bff;color:#fff;border:none;
+  padding:12px;border-radius:8px;
+  font-weight:700;cursor:pointer
+}
 .btn:hover{background:#0056b3}
-
-/* Congrats */
-#congrats{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:9998}
-#congrats video{position:absolute;width:100%;height:100%;object-fit:cover}
-#congrats-card{position:relative;background:rgba(255,255,255,0.9);padding:36px;border-radius:14px;text-align:center;max-width:520px}
-#congrats-card h2{color:#004aad;margin-bottom:10px}
-
-@media (max-width:1024px){
-  #app{flex-direction:column}
+#congrats{
+  position:fixed;inset:0;display:none;
+  align-items:center;justify-content:center;
+  z-index:9998
 }
+#congrats video{
+  position:absolute;width:100%;height:100%;object-fit:cover
+}
+#congrats-card{
+  position:relative;background:rgba(255,255,255,0.9);
+  padding:36px;border-radius:14px;text-align:center;max-width:520px
+}
+#congrats-card h2{color:#004aad;margin-bottom:10px}
+@media (max-width:1024px){#app{flex-direction:column}}
 </style>
 </head>
 <body>
@@ -91,18 +116,19 @@ input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,2
 
 <section id="form-container">
   <h1>Cadastro de Inscrição</h1>
-  <form onsubmit="handleSubmit(event)">
+  <form id="form-inscricao">
     <input id="nome" type="text" placeholder="Nome Completo" required>
-    <input id="telefone" type="tel" placeholder="Número" required>
+    <input id="telefone" type="tel" placeholder="Telefone (somente números)" required>
     <input id="cpf" type="text" placeholder="CPF" required>
     <input id="email" type="email" placeholder="Email" required>
-    <input id="nascimento" type="text" placeholder="Data de Nascimento (dd/mm/aaaa)" required>
+    <input id="nascimento" type="text" placeholder="Data de Nascimento (dd-mm-aaaa)" required>
     <input id="endereco" type="text" placeholder="Endereço" required>
     <input id="cep" type="text" placeholder="CEP" required>
-    <input id="curso" type="text" placeholder="Curso de Interesse" required>
+    <input id="curso" type="text" placeholder="Curso" required>
     <button type="submit" class="btn">Enviar Inscrição</button>
   </form>
 </section>
+
 </div>
 
 <div id="congrats">
@@ -116,7 +142,8 @@ input:focus{outline:none;border-color:#007bff;box-shadow:0 4px 14px rgba(0,123,2
 </div>
 
 <script>
-const WEB_APP_URL="https://script.google.com/macros/s/AKfycbwSppBi7nRh82pEgw8ncmhx9noIly0tQFC1wNYVJuBCyv2gpu05nr7QKQqt5hfF-7sD/exec";
+
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzzmst4tMJOHtskHDkgb-Pd8sUrdTCzxnc0HAZ_qXBrl_PDSNkPnWzTotIEv8eCgaR5tg/exec";
 
 window.addEventListener("load",()=>{
   setTimeout(()=>{
@@ -127,29 +154,66 @@ window.addEventListener("load",()=>{
   },1200);
 });
 
-async function handleSubmit(e){
-  e.preventDefault();
-  const payload={
-    nome:nome.value,
-    telefone:telefone.value,
-    cpf:cpf.value,
-    email:email.value,
-    nascimento:nascimento.value,
-    endereco:endereco.value,
-    cep:cep.value,
-    areaInteresse:curso.value
-  };
+cpf.addEventListener("input", function () {
+  let v = this.value.replace(/\D/g, "");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d)/, "$1.$2");
+  v = v.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+  this.value = v;
+});
 
-  await fetch(WEB_APP_URL,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
-  document.querySelector("form").reset();
-  showCongrats(payload.nome);
-}
+telefone.addEventListener("input", function () {
+  this.value = this.value.replace(/\D/g, "");
+});
+
+nascimento.addEventListener("input", function () {
+  let v = this.value.replace(/\D/g, "");
+  if (v.length > 2) v = v.slice(0,2) + "-" + v.slice(2);
+  if (v.length > 5) v = v.slice(0,5) + "-" + v.slice(5,9);
+  this.value = v;
+});
+
+document.getElementById("form-inscricao").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("Nome", nome.value);
+  formData.append("Telefone", telefone.value);
+  formData.append("CPF", cpf.value);
+  formData.append("Email", email.value);
+  formData.append("Data de Nascimento", nascimento.value);
+  formData.append("Endereço", endereco.value);
+  formData.append("CEP", cep.value);
+  formData.append("Curso", curso.value);
+
+  try{
+    const response = await fetch(WEB_APP_URL,{
+      method:"POST",
+      body: formData
+    });
+
+    const result = await response.json();
+
+    if(result.status === "sucesso"){
+      const nomeCompleto = nome.value;
+      this.reset();
+      showCongrats(nomeCompleto);
+    }else{
+      alert("Erro ao enviar inscrição.");
+    }
+
+  }catch(error){
+    alert("Erro ao enviar inscrição. Verifique conexão.");
+  }
+});
 
 function showCongrats(nomeCompleto){
-  const [primeiro,segundo]=nomeCompleto.split(" ");
-  document.getElementById("congrats-title").textContent=`Parabéns ${primeiro} ${segundo||""}!`;
+  const partes = nomeCompleto.split(" ");
+  document.getElementById("congrats-title").textContent =
+    `Parabéns ${partes[0]} ${partes[1] || ""}!`;
   document.getElementById("congrats").style.display="flex";
 }
+
 </script>
 
 </body>
