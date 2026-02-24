@@ -153,8 +153,8 @@ const ESPACO_SUPERIOR_MOBILE = 100; // <-- MUDE AQUI (em px)
 window.addEventListener("load",()=>{
 
   if(window.innerWidth <= 768){
-    document.body.style.alignItems = "flex-start";
-    document.body.style.paddingTop = ESPACO_SUPERIOR_MOBILE + "px";
+   document.body.style.alignItems = "flex-start";
+document.getElementById("app").style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
   }
 
   setTimeout(()=>{
@@ -229,6 +229,7 @@ function showCongrats(nomeCompleto){
 
 </body>
 </html>
+
 
 
 
