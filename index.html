@@ -143,11 +143,11 @@ input:focus{
 <script>
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzzmst4tMJOHtskHDkgb-Pd8sUrdTCzxnc0HAZ_qXBrl_PDSNkPnWzTotIEv8eCgaR5tg/exec";
-const ESPACO_SUPERIOR_MOBILE = 120;
+const ESPACO_SUPERIOR_MOBILE = 80;
 
 window.addEventListener("load",()=>{
 
-  if(window.innerWidth <= 750){
+  if(window.innerWidth <= 740){
     document.body.style.alignItems = "flex-start";
     document.getElementById("app").style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
   }
@@ -233,3 +233,4 @@ function showCongrats(nomeCompleto){
 
 </body>
 </html>
+
