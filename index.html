@@ -4,8 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Inscrição Curso</title>
-<link rel="icon" type="image/x-icon" href="simbolo.ico">
-<link rel="shortcut icon" href="tata.png">
+<link rel="icon" type="image/x-icon" href="icone.ico">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -92,14 +91,14 @@ input:focus{
 <body>
 
 <div id="splash">
-  <img src="tata.png">
+  <img src="simbolo.png">
   <p>Carregando...</p>
 </div>
 
 <div id="app" style="display:none">
 
 <aside id="tutor">
-  <img id="logo-tutor" src="tata.png">
+  <img id="logo-tutor" src="simbolo.png">
   <img class="tutor-photo" src="fabricio-benigno.jpg">
   <div class="tutor-name">Fabricio Benigno</div>
   <div class="tutor-role">Tutor e Orientador</div>
@@ -118,25 +117,13 @@ input:focus{
   <h1>Cadastro de Inscrição</h1>
   <form id="form-inscricao">
     <input id="nome" type="text" placeholder="Nome Completo" required>
-
-    <input id="telefone" type="tel" inputmode="numeric"
-           placeholder="Telefone (somente números)" required>
-
-    <input id="cpf" type="text" inputmode="numeric"
-           placeholder="CPF" required>
-
+    <input id="telefone" type="tel" inputmode="numeric" placeholder="Telefone (somente números)" required>
+    <input id="cpf" type="text" inputmode="numeric" placeholder="CPF" required>
     <input id="email" type="email" placeholder="Email" required>
-
-    <input id="nascimento" type="text" inputmode="numeric"
-           placeholder="Data de Nascimento (dd-mm-aaaa)" required>
-
+    <input id="nascimento" type="text" inputmode="numeric" placeholder="Data de Nascimento (dd-mm-aaaa)" required>
     <input id="endereco" type="text" placeholder="Endereço" required>
-
-    <input id="cep" type="text" inputmode="numeric"
-           placeholder="CEP" required>
-
+    <input id="cep" type="text" inputmode="numeric" placeholder="CEP" required>
     <input id="curso" type="text" placeholder="Curso" required>
-
     <button type="submit" class="btn">Enviar Inscrição</button>
   </form>
 </section>
@@ -157,7 +144,18 @@ input:focus{
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzzmst4tMJOHtskHDkgb-Pd8sUrdTCzxnc0HAZ_qXBrl_PDSNkPnWzTotIEv8eCgaR5tg/exec";
 
+/* ============================
+   CONTROLE DE ESPAÇO MOBILE
+   ALTERE APENAS O VALOR ABAIXO
+============================ */
+const ESPACO_SUPERIOR_MOBILE = 120; // <-- MUDE AQUI (em px)
+
 window.addEventListener("load",()=>{
+
+  if(window.innerWidth <= 768){
+    document.getElementById("tutor").style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
+  }
+
   setTimeout(()=>{
     document.getElementById("splash").style.display="none";
     const app=document.getElementById("app");
