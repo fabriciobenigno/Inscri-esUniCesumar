@@ -131,7 +131,7 @@ input:focus{
 </div>
 
 <div id="congrats">
-  <video autoplay muted loop>
+  <video autoplay muted loop playsinline>
     <source src="confetes.mp4" type="video/mp4">
   </video>
   <div id="congrats-card">
@@ -143,19 +143,19 @@ input:focus{
 <script>
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzzmst4tMJOHtskHDkgb-Pd8sUrdTCzxnc0HAZ_qXBrl_PDSNkPnWzTotIEv8eCgaR5tg/exec";
-
-/* ================================
-   CONTROLE DE ESPAÇO NO CELULAR
-   ALTERE APENAS O VALOR ABAIXO
-================================ */
-const ESPACO_SUPERIOR_MOBILE = 10; // <-- MUDE AQUI (em px)
+const ESPACO_SUPERIOR_MOBILE = 120;
 
 window.addEventListener("load",()=>{
 
   if(window.innerWidth <= 750){
-   document.body.style.alignItems = "flex-start";
-document.getElementById("app").style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
+    document.body.style.alignItems = "flex-start";
+    document.getElementById("app").style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
   }
+
+  // Força vídeo a rodar no mobile
+  const video = document.querySelector("#congrats video");
+  video.muted = true;
+  video.play().catch(()=>{});
 
   setTimeout(()=>{
     document.getElementById("splash").style.display="none";
@@ -209,6 +209,10 @@ document.getElementById("form-inscricao").addEventListener("submit", async funct
       const nomeCompleto = nome.value;
       this.reset();
       showCongrats(nomeCompleto);
+
+      // Força vídeo novamente ao exibir
+      const video = document.querySelector("#congrats video");
+      video.play().catch(()=>{});
     }else{
       alert("Erro ao enviar inscrição.");
     }
@@ -229,10 +233,3 @@ function showCongrats(nomeCompleto){
 
 </body>
 </html>
-
-
-
-
-
-
-
