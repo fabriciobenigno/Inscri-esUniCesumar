@@ -131,7 +131,7 @@ input:focus{
 </div>
 
 <div id="congrats">
-  <video autoplay muted loop playsinline>
+  <video id="videoCongrats" muted playsinline preload="auto">
     <source src="confetes.mp4" type="video/mp4">
   </video>
   <div id="congrats-card">
@@ -145,17 +145,20 @@ input:focus{
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzzmst4tMJOHtskHDkgb-Pd8sUrdTCzxnc0HAZ_qXBrl_PDSNkPnWzTotIEv8eCgaR5tg/exec";
 const ESPACO_SUPERIOR_MOBILE = 80;
 
-window.addEventListener("load",()=>{
+function ajustarEspacoMobile(){
+  const app = document.getElementById("app");
 
   if(window.innerWidth <= 740){
     document.body.style.alignItems = "flex-start";
-    document.getElementById("app").style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
+    app.style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
+  }else{
+    document.body.style.alignItems = "center";
+    app.style.marginTop = "0px";
   }
+}
 
-  // Força vídeo a rodar no mobile
-  const video = document.querySelector("#congrats video");
-  video.muted = true;
-  video.play().catch(()=>{});
+window.addEventListener("load",()=>{
+  ajustarEspacoMobile();
 
   setTimeout(()=>{
     document.getElementById("splash").style.display="none";
@@ -164,6 +167,8 @@ window.addEventListener("load",()=>{
     app.style.opacity=1;
   },1200);
 });
+
+window.addEventListener("resize", ajustarEspacoMobile);
 
 cpf.addEventListener("input", function () {
   let v = this.value.replace(/\D/g, "");
@@ -198,21 +203,13 @@ document.getElementById("form-inscricao").addEventListener("submit", async funct
   formData.append("Curso", curso.value);
 
   try{
-    const response = await fetch(WEB_APP_URL,{
-      method:"POST",
-      body: formData
-    });
-
+    const response = await fetch(WEB_APP_URL,{ method:"POST", body: formData });
     const result = await response.json();
 
     if(result.status === "sucesso"){
       const nomeCompleto = nome.value;
       this.reset();
       showCongrats(nomeCompleto);
-
-      // Força vídeo novamente ao exibir
-      const video = document.querySelector("#congrats video");
-      video.play().catch(()=>{});
     }else{
       alert("Erro ao enviar inscrição.");
     }
@@ -226,11 +223,18 @@ function showCongrats(nomeCompleto){
   const partes = nomeCompleto.split(" ");
   document.getElementById("congrats-title").textContent =
     `Parabéns ${partes[0]} ${partes[1] || ""}!`;
-  document.getElementById("congrats").style.display="flex";
+
+  const congrats = document.getElementById("congrats");
+  const video = document.getElementById("videoCongrats");
+
+  congrats.style.display="flex";
+
+  video.pause();
+  video.currentTime = 0;
+  video.play().catch(()=>{});
 }
 
 </script>
 
 </body>
 </html>
-
