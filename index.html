@@ -144,16 +144,17 @@ input:focus{
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzzmst4tMJOHtskHDkgb-Pd8sUrdTCzxnc0HAZ_qXBrl_PDSNkPnWzTotIEv8eCgaR5tg/exec";
 
-/* ============================
-   CONTROLE DE ESPAÇO MOBILE
+/* ================================
+   CONTROLE DE ESPAÇO NO CELULAR
    ALTERE APENAS O VALOR ABAIXO
-============================ */
-const ESPACO_SUPERIOR_MOBILE = 170; // <-- MUDE AQUI (em px)
+================================ */
+const ESPACO_SUPERIOR_MOBILE = 120; // <-- MUDE AQUI (em px)
 
 window.addEventListener("load",()=>{
 
   if(window.innerWidth <= 768){
-    document.getElementById("tutor").style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
+    document.body.style.alignItems = "flex-start";
+    document.body.style.paddingTop = ESPACO_SUPERIOR_MOBILE + "px";
   }
 
   setTimeout(()=>{
@@ -228,5 +229,3 @@ function showCongrats(nomeCompleto){
 
 </body>
 </html>
-
-
