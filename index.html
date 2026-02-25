@@ -69,9 +69,31 @@ input:focus{
 .btn{
   background:#007bff;color:#fff;border:none;
   padding:12px;border-radius:8px;
-  font-weight:700;cursor:pointer
+  font-weight:700;cursor:pointer;position:relative
 }
 .btn:hover{background:#0056b3}
+.btn.loading{
+  background:#0056b3;
+  cursor:not-allowed;
+  opacity:.8;
+}
+.btn.loading::after{
+  content:"";
+  width:18px;
+  height:18px;
+  border:3px solid #fff;
+  border-top:3px solid transparent;
+  border-radius:50%;
+  position:absolute;
+  right:15px;
+  top:50%;
+  transform:translateY(-50%);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{
+  from{transform:translateY(-50%) rotate(0deg)}
+  to{transform:translateY(-50%) rotate(360deg)}
+}
 #congrats{
   position:fixed;inset:0;display:none;
   align-items:center;justify-content:center;
@@ -124,7 +146,9 @@ input:focus{
     <input id="endereco" type="text" placeholder="Endereço" required>
     <input id="cep" type="text" inputmode="numeric" placeholder="CEP" required>
     <input id="curso" type="text" placeholder="Curso" required>
-    <button type="submit" class="btn">Enviar Inscrição</button>
+    <button type="submit" class="btn" id="btnEnviar">
+      <span id="btnTexto">Enviar Inscrição</span>
+    </button>
   </form>
 </section>
 
@@ -147,7 +171,6 @@ const ESPACO_SUPERIOR_MOBILE = 5;
 
 function ajustarEspacoMobile(){
   const app = document.getElementById("app");
-
   if(window.innerWidth <= 768){
     document.body.style.alignItems = "flex-start";
     app.style.marginTop = ESPACO_SUPERIOR_MOBILE + "px";
@@ -159,7 +182,6 @@ function ajustarEspacoMobile(){
 
 window.addEventListener("load",()=>{
   ajustarEspacoMobile();
-
   setTimeout(()=>{
     document.getElementById("splash").style.display="none";
     const app=document.getElementById("app");
@@ -192,6 +214,13 @@ nascimento.addEventListener("input", function () {
 document.getElementById("form-inscricao").addEventListener("submit", async function(e){
   e.preventDefault();
 
+  const btn = document.getElementById("btnEnviar");
+  const btnTexto = document.getElementById("btnTexto");
+
+  btn.classList.add("loading");
+  btn.disabled = true;
+  btnTexto.textContent = "Enviando...";
+
   const formData = new FormData();
   formData.append("Nome", nome.value);
   formData.append("Telefone", telefone.value);
@@ -209,13 +238,23 @@ document.getElementById("form-inscricao").addEventListener("submit", async funct
     if(result.status === "sucesso"){
       const nomeCompleto = nome.value;
       this.reset();
-      showCongrats(nomeCompleto);
+      setTimeout(()=>{
+        showCongrats(nomeCompleto);
+      },1200);
     }else{
       alert("Erro ao enviar inscrição.");
+      resetBotao();
     }
 
   }catch(error){
     alert("Erro ao enviar inscrição. Verifique conexão.");
+    resetBotao();
+  }
+
+  function resetBotao(){
+    btn.classList.remove("loading");
+    btn.disabled = false;
+    btnTexto.textContent = "Enviar Inscrição";
   }
 });
 
@@ -229,16 +268,24 @@ function showCongrats(nomeCompleto){
 
   congrats.style.display="flex";
 
-  video.pause();
   video.currentTime = 0;
   video.play().catch(()=>{});
+
+  video.addEventListener("pause", () => {
+    video.play().catch(()=>{});
+  });
+
+  let redirecionado = false;
+
+  video.addEventListener("timeupdate", function(){
+    if(video.currentTime >= 27 && !redirecionado){
+      redirecionado = true;
+      window.location.href = "https://instagram.com/fabricio_benigno";
+    }
+  });
 }
 
 </script>
 
 </body>
 </html>
-
-
-
-
